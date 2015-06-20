@@ -1,0 +1,75 @@
+---
+layout: post
+title: Entity Framework Code First– How to add a new Property to your model class
+  with making an effect in your table structure
+date: 2012-03-25 03:41:58.000000000 -04:00
+categories:
+- ASP.NET MVC
+- EntityFramework
+tags:
+- Entity Framework CodeFirst
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _yoast_wpseo_linkdex: '0'
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>IF you are using Entity framework code first approach, there is a good chance that you will be adding new properties to your modal classes as your development goes further. As we know the “code-first” approach,  creates the database schema from your code ( your classes which represent your entities).  When you add a new property to your class, your tables are not in sync with your classes. because your schema is not updated. So running the project will give you an error like this</p>
+<p>The Yellow screen of death while accessing the page in browser.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/efcodefiresterror1.png"><img class="alignnone  wp-image-107" title="efcodefiresterror" src="assets/efcodefiresterror1.png" alt="" width="519" height="233" /></a></p>
+<p>or while debugging in the IDE</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image25.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" title="image" src="assets/image_thumb25.png" alt="image" width="535" height="363" border="0" /></a></p>
+<p>What should we need to do to fix this problem ? Lets go back to our example and show what made Visual studio throw me this error.</p>
+<p>&nbsp;</p>
+<p>This was my model class</p>
+<p>&nbsp;</p>
+<p>public class ContactPerson : Person<br />
+{<br />
+public virtual ICollection&lt;PhoneNumber&gt; PhoneNumbers { set; get; }</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>My ContactPerson class is inherited from the Person class which looks like this</p>
+<p>public abstract class Person<br />
+{<br />
+public int ID { set; get; }<br />
+public string FirstName { set; get; }<br />
+public string LastName { set; get; }<br />
+public DateTime CreatedDate { set; get; }<br />
+public string FullName<br />
+{<br />
+get<br />
+{<br />
+return FirstName + " " + LastName;<br />
+}<br />
+}<br />
+}</p>
+<p>&nbsp;</p>
+<p>So now I thought of adding a new property to the ContactPerson class so I added a new string property to my class like this</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/new-proprty-added1.png"><img class="alignnone size-full wp-image-110" title="new-proprty added" src="assets/new-proprty-added1.png" alt="" width="526" height="111" /></a></p>
+<p>and now my modal class is not in sync with my database. That’s y I got the error when try to run the application.</p>
+<p>&nbsp;</p>
+<p>To fix the error, We have to add a new class to our project.I will add this to my DAL folder.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/add-new-initializer-class.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" title="add-new-initializer-class" src="assets/add-new-initializer-class_thumb.png" alt="add-new-initializer-class" width="578" height="367" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>I gave name as “CRMInitializer” and I in herited this class from “DropCreateDatabaseIfModelChanges&lt;CRMContext&gt;”.</p>
+<p>My new class has nothing else in that. No methods or no properties or we didn’t even add a constructor</p>
+<p>&nbsp;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/new-class-content1.png"><img class="alignnone size-full wp-image-105" title="new-class-content" src="assets/new-class-content1.png" alt="" width="582" height="212" /></a></p>
+<p>Now go to global.asax  and add the below line as the first line in your Application_Start method</p>
+<p>&nbsp;</p>
+<p>Database.SetInitializer&lt;OpenMVCRM.DAL.CRMContext&gt;(new DAL.CRMInitializer());</p>
+<p>&nbsp;</p>
+<p>So my updated Application_Start looks like this.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/global-asax-content.png"><img class="alignnone size-full wp-image-109" title="global-asax content" src="assets/global-asax-content.png" alt="" width="603" height="155" /></a></p>
+<p>&nbsp;</p>
+<p>All set. Entity framework will add a new column to your table now.</p>
+<p><span style="background-color: #ffff00;"><strong>Keep in mind that, this approach will drop the existing tables in the database and recreate those tables from scratch. That means you will loose all the data you already stored in the tables.</strong></span></p>

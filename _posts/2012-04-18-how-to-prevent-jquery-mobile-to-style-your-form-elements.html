@@ -1,0 +1,54 @@
+---
+layout: post
+title: How to prevent jQuery mobile to style your form elements
+date: 2012-04-18 13:38:32.000000000 -04:00
+categories:
+- jQuery-mobile
+tags:
+- css
+- jQuery-mobile
+- prevent jQuery mobile to style your form elements
+- razor
+- theme
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_linkdex: '44'
+  _yoast_wpseo_focuskw: prevent jQuery mobile to style your form elements
+  _yoast_wpseo_title: How to prevent jQuery mobile to style your form elements - TechiesWeb
+  _yoast_wpseo_metadesc: Prevent jQuery mobile to style your form elements by specifying
+    the data-role property values as none
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>If you are using jQuery mobile in your web page ( with their css ( default theme or whatever)), it will usually override your styles for input elements like this</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/jq-mobile-input-style.png"><img class="alignnone size-full wp-image-138" title="jq-mobile-input-style" src="assets/jq-mobile-input-style.png" alt="" width="419" height="71" /></a><br />
+But If you want to to prevent jQuery mobile to style your form elements and want to use the awesome styles your UI designer created, you can do that by simply adding data-role attribue to the input element with value set to "none"</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/jq-mobile-ignore-style-html.png"><img class="alignnone size-full wp-image-139" title="jq-mobile-ignore-style-html" src="assets/jq-mobile-ignore-style-html.png" alt="" width="475" height="62" /></a></p>
+<p>If you are working with ASP.NET MVC3 razor, you can use this syntax</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/jq-mobile-ignore-style-razor.png"><img class="alignnone size-full wp-image-140" title="jq-mobile-ignore-style-razor" src="assets/jq-mobile-ignore-style-razor.png" alt="" width="538" height="69" /></a></p>
+<p>In this case it is the <strong>underscore instead of the dash</strong>. ASP.NET MVC will automatically convert this underscore to a dash when in render the Text box</p>
+<p>&nbsp;</p>
+<p>The output will be your normal input box without any style</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/jq-mobile-non-style.png"><img class="alignnone size-full wp-image-141" title="jq-mobile-non-style" src="assets/jq-mobile-non-style.png" alt="" width="212" height="55" /></a></p>
+<p>Sorry , my  UI Designer is on vacation ! :)</p>
+<p><a href="http://jquerymobile.com/download/">http://jquerymobile.com/download/</a></p>

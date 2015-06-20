@@ -1,0 +1,65 @@
+---
+layout: post
+title: How to get Add View/ Add Controller menus in Solution explorer when converting
+  existing ASP.NET web for project to MVC
+date: 2012-03-11 22:43:31.000000000 -04:00
+categories:
+- ASP.NET
+- ASP.NET MVC
+tags:
+- ASP.NET MVC
+- Controller
+- MVC3
+- ProjectTypeGuiIds
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _yoast_wpseo_linkdex: '56'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: Add View/ Add Controller menus
+  _yoast_wpseo_title: 'Add View/ Add Controller menus in Solution explorer when converting
+    existing ASP.NET web for project to MVC '
+  _yoast_wpseo_metadesc: how to enable Add View/ Add Controller menus in Visual studio
+    when converting existing web forms project to MVC project type.
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>So you heard about (that wonderful and addictive) ASP.MET MVC and started thinking to jump into that by converting your existing ASP.NET web application to ASP.NET MVC ? There are plenty of tutorials available online to help you in that .Scott gives step by step instruction in <a href="http://www.hanselman.com/blog/IntegratingASPNETMVC3IntoExistingUpgradedASPNET4WebFormsApplications.aspx" target="_blank">this tutirial</a>. I also followed this link to do the same. One thing i found missing is , Scot did not mention in his post how to fix the issue of "<strong>Add View</strong>/ <strong>Add Controller</strong> menus"  not appearing when you right click on the Controller/ View folders. I just want to show that here.</p>
+<p>&nbsp;</p>
+<p>The reason why the menus are not coming is visual studio IDE do not consider this as a real ASP.NET MVC project because the project file does not say so. So we should update the project file to include the project type guid  for ASP.NET MVC and then the IDE willl start supporting the menus specific for ASP.NET MVC type project.</p>
+<p>&nbsp;</p>
+<p><strong>Step 1</strong></p>
+<p>Go to your solution explorer and unload the existing ASP.NET project by right clicking and selecting "<strong>Unload Project</strong>"</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/unload1.png"><img class="alignnone size-full wp-image-10" title="unload" src="assets/unload1.png" alt="" width="352" height="167" /></a></p>
+<p><strong>Step 2</strong></p>
+<p>Right Click the Project in solution explorer and select "<strong>Edit </strong><em><strong><span style="color: #000080;">your project file name</span>"</strong></em></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/edit-proj.png"><img class="alignnone size-full wp-image-9" title="edit-proj" src="assets/edit-proj.png" alt="" width="332" height="196" /></a></p>
+<p><strong>Step 3</strong></p>
+<p>&nbsp;</p>
+<p>Go to the Element called "ProjectTypeGuids" and Add "<strong><span style="color: #000080;">{E53F8FEA-EAE0-44A6-8774-FFD645390401};</span></strong>" infront of the existing content.</p>
+<p><strong>Before Adding</strong></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/beforeupdate.png"><img class="alignnone size-full wp-image-11" title="beforeupdate" src="assets/beforeupdate.png" alt="" width="876" height="196" /></a></p>
+<p><strong>After Adding</strong></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/after.png"><img class="alignnone  wp-image-12" title="after" src="assets/after.png" alt="" width="909" height="220" /></a></p>
+<p>And We are all set to go and rock</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/result.png"><img class="alignnone size-full wp-image-13" title="result" src="assets/result.png" alt="" width="552" height="196" /></a></p>
+<p>I would love to know how many of you went back to web forms after working  on an MVC project ?  i will buy a coffee for you if your answer is yes.</p>
+<p>&nbsp;</p>

@@ -1,0 +1,528 @@
+---
+layout: post
+title: Paging, Sorting and Filtering to your ASP.NET MVC Projects with kTable plugin
+date: 2013-12-14 23:36:01.000000000 -05:00
+categories:
+- ASP.NET MVC
+tags:
+- Filtering in Asp.NET MVC
+- kTable
+- Paging in asp.net mvc
+- Sorting in ASP.NET MVC
+status: publish
+type: post
+published: true
+meta:
+  _yoast_wpseo_linkdex: '77'
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: Paging, Sorting and Filtering to your ASP.NET MVC Projects
+    with kTable plugin
+  _yoast_wpseo_title: Paging, Sorting and Filtering to your ASP.NET MVC Projects with
+    kTable plugin
+  _yoast_wpseo_metadesc: Paging, Sorting and Filtering to your ASP.NET MVC Projects
+    with kTable plugin
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_sitemap-html-include: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_opengraph-image: ''
+  _yoast_wpseo_google-plus-description: ''
+  _wpas_done_all: '1'
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>There are a lot of ways to add the "Paging-Sorting-Filtering" functionality to the tabular displays in an ASP.NET MVC pages using different plugins or libraries. In this post i am going to explain how to bring Paging, Sorting and Filtering to your ASP.NET MVC Projects using the <a href="https://github.com/kshyju/kTable">kTable</a> jQuery plugin.</p>
+<h2>Paging, Sorting and Filtering to your ASP.NET MVC Projects with kTable plugin</h2>
+<p>Let's start by creating a blank MVC Project. I am assuming that the readers know how to create an MVC web project and add a new action method and it's associated view to it. I have my HomeController which has an Index action which shows a list of customers in a table format. So my code looks like this.</p>
+<p><strong>Home Controller</strong></p>
+<pre class="brush:csharp">public class HomeController : Controller
+{
+    readonly CustomerService customerService;
+    public HomeController()
+    {
+        customerService = new CustomerService();
+    }
+
+    public ActionResult Index()
+    {
+        var customerList = customerService.GetCustomers();
+        var customerListVM = new CustomerListViewModel { Customers = customerList };
+        return View(customerListVM);
+    }
+
+}</pre>
+<p>You can see that i am creating an object of CustomerService class in our constructor which i will be using in our action methods later. CustomerService is a service class which provides data. For demo purpose, I hardcoded the data in this class. You may replace it with data from other data sources like web service/database/xml etc..</p>
+<p><strong>Customer Service</strong></p>
+<pre class="brush:csharp">public class CustomerService
+{
+    public List&lt;Customer&gt; GetCustomers()
+    {
+        return new List&lt;Customer&gt; {
+            new Customer { FirstName = "Michael", City = "Scranton", RegistrationDate = DateTime.Today.AddDays(-45) },
+            new Customer { FirstName = "Dwight", City = "Detroit", RegistrationDate = DateTime.Today.AddDays(-44) },
+            new Customer { FirstName = "Jim", City = "Scranton", RegistrationDate = DateTime.Today.AddDays(-34) },
+            new Customer { FirstName = "Mike", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-38) },
+            new Customer { FirstName = "Andy", City = "Seattle", RegistrationDate = DateTime.Today.AddDays(-48) },
+            new Customer { FirstName = "Angela", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-45) },
+            new Customer { FirstName = "Toby", City = "Scranton", RegistrationDate = DateTime.Today.AddDays(-42) },
+            new Customer { FirstName = "Pamela", City = "Scranton", RegistrationDate = DateTime.Today.AddDays(-45) },
+            new Customer { FirstName = "Jan", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-41) },
+            new Customer { FirstName = "Kevin", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-35) },
+            new Customer { FirstName = "Robert", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-48) },
+            new Customer { FirstName = "Kelly", City = "Ann Arbor", RegistrationDate = DateTime.Today.AddDays(-40) }        
+        };
+    }
+}</pre>
+<p>In our Index action method, we are calling the <code>GetCustomers</code> method to get a list of customers and setting that as the <code>Customers</code> property of our <code>CustomerListViewModel</code> instance. CustomerListViewModel class looks like this</p>
+<pre class="brush:csharp">public class Customer
+{
+    public int ID { set; get; }
+    public string FirstName { set; get; }  
+    public string City { set; get; }
+    public DateTime RegistrationDate { set; get; }
+}
+
+public class CustomerListViewModel
+{
+    public List&lt;Customer&gt; Customers { set; get; }
+    public CustomerListViewModel()
+    {
+        Customers = new List&lt;Customer&gt;();
+    }
+}</pre>
+<p>Our Index view is strongly typed to the <code>CustomerListViewModel</code>. In this view, we have some simple code to display the data in an HTML table.</p>
+<pre class="brush:csharp">@model ASPNETMVCFitlerSortingWithKTable.Models.CustomerListViewModel
+&lt;h2&gt;Customers&lt;/h2&gt;
+&lt;div&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;First Name&lt;/th&gt;      
+        &lt;th&gt;City&lt;/th&gt;
+        &lt;th&gt;Registration Date&lt;/th&gt;
+    &lt;/tr&gt;    
+    @foreach(var customer in Model.Customers)
+    {
+        &lt;tr&gt;
+            &lt;td&gt;@customer.FirstName&lt;/td&gt;           
+            &lt;td&gt;@customer.City&lt;/td&gt;
+            &lt;td&gt;@customer.RegistrationDate.ToShortDateString()&lt;/td&gt;
+        &lt;/tr&gt;
+    }    
+&lt;/table&gt;
+&lt;/div&gt;</pre>
+<p>Now when we run the app, We will see all the customers in an HTML table.</p>
+<p><img class="alignnone" alt="" src="assets/customers-in-html-table.png" width="309" height="449" /></p>
+<p>&nbsp;</p>
+<h3>Implementing Paging</h3>
+<p>To add paging, the first thing to do is to add a new class to our project to represent the paging details. This class will have properties like BaseUrl,CurrentPage,HasNextPage etc...</p>
+<pre class="brush:csharp">public class PagingDetails
+{ 
+    public string BaseURL { get; set; }
+    public int CurrentPage { get; set; }
+    public bool HasNextPage { get; set; }
+    public bool HasPrevPage { get; set; }
+    public int QryStrID { get; set; }
+    public string QryStrType { get; set; }
+    public int TotalPages { get; set; }
+    public int TotalRecords { get; set; }
+}</pre>
+<p>Now we will create a new partial view which has the markup for the paging information. Let's call this view as "TablePagingFooter.cshtml" and save it in the <code>Views/Shared</code> folder.</p>
+<pre class="brush:applescript">@model ASPNETMVCFitlerSortingWithKTable.Models.PagingDetails
+@{
+    string baseurl = ViewData["baseurl"].ToString();
+}
+&lt;div class="pagingFooterLeft"&gt;
+   Total @Model.TotalRecords @(Model.TotalRecords&gt; 1 ? "Records in" : "Record in") @Model.TotalPages @(Model.TotalPages&gt;1? "pages":"page")
+&lt;/div&gt;
+&lt;div class="pagingFooterRight"&gt;
+  @for (int i = 1; i &lt;= Model.TotalPages; i++)
+  {        
+      if (Model.CurrentPage == i)
+      { 
+        &lt;span class="page-number currentPage"&gt;@i.ToString()&lt;/span&gt;        
+      }
+      else
+      {
+        &lt;a class="gridPageNumber" title="@i.ToString()" href="@baseurl&amp;page=@i.ToString()"&gt;
+            &lt;span class="page-number"&gt;@i.ToString()&lt;/span&gt;
+        &lt;/a&gt;
+      }
+  }            
+&lt;/div&gt;</pre>
+<p>Let's  update our <code>CustomerListViewModel</code>  viewmodel to have a property for the PagingDetails.</p>
+<pre class="brush:csharp">public class CustomerListViewModel
+{
+    public List&lt;Customer&gt; Customers { set; get; }
+    public PagingDetails PagingDetails { set; get; }
+    public CustomerListViewModel()
+    {
+        Customers = new List&lt;Customer&gt;();
+        PagingDetails = new PagingDetails();
+    }
+}</pre>
+<p>Now we will go to our Index action method and make some changes there to handle the paging. Since the paging is going to be a common functionality which we need to use across all our listing screens, We will keep this functionality in a common class from which we will inherit our controllers. We will create a new class called BaseController in our Controllers folder.</p>
+<pre class="brush:csharp">public class BaseController : Controller
+{
+    protected void ApplyPagingInformation(int pageNumber, int pageSize, PagingDetails pagingDetails, int totalRowCount)
+    {
+        pagingDetails.TotalRecords = totalRowCount;
+        pagingDetails.CurrentPage = pageNumber;
+        int nextPageItemCount = pagingDetails.TotalRecords - (pageSize * pageNumber);
+        pagingDetails.HasNextPage = (nextPageItemCount &gt; 0);
+        pagingDetails.HasPrevPage = (pageNumber &gt; 1);
+
+        var reminder = pagingDetails.TotalRecords % pageSize;
+
+        pagingDetails.TotalPages = (pagingDetails.TotalRecords / pageSize);
+        if (reminder &gt; 0)
+            pagingDetails.TotalPages++;
+    }
+}</pre>
+<p>Update the HomeController class to inherit it from BaseController.</p>
+<p>Now we will include the Partial view in our index view , just below the HTML table closing tag.</p>
+<pre class="brush:csharp">&lt;div id="tblFooter" class="divtblFooter"&gt;
+   @Html.Partial("TablePagingFooter", Model.PagingDetails, new ViewDataDictionary { {"baseurl",Url.Action("Index","Home")+"?c"}})
+&lt;/div&gt;</pre>
+<p>Now when your run the app, you can see that there is a new div just below our HTML table with the paging information. It shows how many total records we have, how many total pages and all navigable page numbers on the right side. (I have added some custom styling for the paging div)</p>
+<p><img class="alignnone" alt="" src="assets/customer-list-with-paging.png" width="430" height="275" /></p>
+<p>&nbsp;</p>
+<h3><strong>Sorting and Filtering</strong></h3>
+<p>We are using the kTable plugin for sorting and filtering. kTable is a tiny jQuery plugin which will make some changes to our HTML table markup to include some sort-filter options to our table headers.</p>
+<p>Go and download the latest version of <a href="https://github.com/kshyju/kTable">kTable</a> plugin from github and include that in your projects Scripts folder. You need to add the images folder and css file as well (to your Contents folder). Once you are done with that, update your index view or layout page to include <code>jquery.ktable.js</code>and <code>ktable.css</code> files.</p>
+<p>Next step is to add "filterable" css class to the columns where we need filtering feature. By default, kTable will convert all your table headers with the css class <code>filterable</code> to filterable columns. If the column for showing a date time value, add an HTML5 data attribute called "datatype" with value as date. We will invoke the ktable plugin on our table element also.</p>
+<p>The updated markup of index view will be like this now.</p>
+<pre class="brush:csharp">@model ASPNETMVCFitlerSortingWithKTable.Models.CustomerListViewModel
+&lt;h2&gt;Customers&lt;/h2&gt;
+&lt;div&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th class="filterable"&gt;First Name&lt;/th&gt;      
+        &lt;th class="filterable"&gt;City&lt;/th&gt;
+        &lt;th class="filterable"  datatype="date"&gt;Registration Date&lt;/th&gt;
+    &lt;/tr&gt;    
+    @foreach(var customer in Model.Customers)
+    {
+        &lt;tr&gt;
+            &lt;td&gt;@customer.FirstName&lt;/td&gt;           
+            &lt;td&gt;@customer.City&lt;/td&gt;
+            &lt;td&gt;@customer.RegistrationDate.ToShortDateString()&lt;/td&gt;
+        &lt;/tr&gt;
+    }    
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id="tblFooter" class="divtblFooter"&gt;
+   @Html.Partial("TablePagingFooter", Model.PagingDetails, new ViewDataDictionary { {"baseurl",Url.Action("Index","Home")+"?c"}})
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    $(function () {
+        $("table").ktable({                        
+            filterable: {
+                filterableColumnClassName: 'filterable',
+                callBackOnFilter: function (item) { alert("Filter clicked") },
+                callBackOnClear: function (item) { alert("Clear clicked") }
+            }
+        });
+    });
+&lt;/script&gt;</pre>
+<p>&nbsp;</p>
+<p>Now when you run the app, You will see that there will be a filter icon on the table header for each column and clicking on this will bring a small popup where you can enter your search data.</p>
+<p><img class="alignnone" alt="" src="assets/customer-list-with-filter-popup.png" width="470" height="198" /></p>
+<p>&nbsp;</p>
+<p>User can enter a search text and click on filter button. But now it will simply show an alert message  because our code says so. We will update the callBackOnFilter and callBackOnClear events to send the filter criteria to our server to get the filtered data.</p>
+<p>We will add a new class to our Models folder called <code>ListFilterVM</code> with properties to handle the Sort &amp; Filter activities</p>
+<pre class="brush:csharp">public class FilterVM
+{
+    public string ColumnName { set; get; }
+    public string SearchType { set; get; }
+    public string SearchText { set; get; }
+    public string StartDate { set; get; }
+    public string EndDate { set; get; }
+}
+public class ListFilterVM
+{
+    public List&lt;FilterVM&gt; Filters { set; get; }
+    public string SortColumnName { set; get; }
+    public string SortType { set; get; }
+    public string LastEvent { set; get; }
+}</pre>
+<p>So when user submits his search terms in the serach popup and hit submit button, It will build an object in javascript which is similar to our ListFilterVM object and send it to our Index method. Index method will reads this object values and apply the filtering and sorting on the data and send the response in JSON format back to the client. When we receive the response (JSON) from the server, we will take each part and replace the HTML markup.</p>
+<p>So we need to add some more methods to our server code. First we will add one more method to our BaseControlller called <code>RenderPartialView</code>. This method is used to Convert the HTML Markup of the Partial view to string format so that we can send it in the JSON structure.</p>
+<pre class="brush:csharp">protected string RenderPartialView(string viewName, object model, ViewDataDictionary dictionary = null)
+{
+    if (string.IsNullOrEmpty(viewName))
+        viewName = this.ControllerContext.RouteData.GetRequiredString("action");
+
+    this.ViewData.Model = model;
+    if (dictionary != null)
+    {
+        foreach (var item in dictionary.Keys)
+        {
+            this.ViewData.Add(item, dictionary[item]);
+        }
+    }
+    using (var sw = new StringWriter())
+    {
+        ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(this.ControllerContext, viewName);
+        var viewContext = new ViewContext(this.ControllerContext, viewResult.View, this.ViewData, this.TempData, sw);
+        viewResult.View.Render(viewContext, sw);
+
+        return sw.GetStringBuilder().ToString();
+    }
+}</pre>
+<p>Now  we will add couple of methods to our <code>CustomerService</code> class to handle the Filter and Sort activity.</p>
+<pre class="brush:csharp">private List&lt;Customer&gt; SortClientList(List&lt;Customer&gt; clientList, ListFilterVM filter)
+{
+    //Let's sort first and then filter
+    if (!String.IsNullOrEmpty(filter.SortColumnName))
+    {
+        if (filter.SortColumnName.ToUpper() == "FIRSTNAME")
+        {
+            if (!String.IsNullOrEmpty(filter.SortType) &amp;&amp; filter.SortType.ToUpper() == "DESC")
+                clientList = clientList.OrderByDescending(s =&gt; s.FirstName).ToList();
+            else
+                clientList = clientList.OrderBy(s =&gt; s.FirstName).ToList();
+        }
+        else if (filter.SortColumnName.ToUpper() == "CITY")
+        {
+            if (!String.IsNullOrEmpty(filter.SortType) &amp;&amp; filter.SortType.ToUpper() == "DESC")
+                clientList = clientList.OrderByDescending(s =&gt; s.City).ToList();
+            else
+                clientList = clientList.OrderBy(s =&gt; s.City).ToList();
+        }
+        else if (filter.SortColumnName.ToUpper() == "REGISTRATIONDATE")
+        {
+            if (!String.IsNullOrEmpty(filter.SortType) &amp;&amp; filter.SortType.ToUpper() == "DESC")
+                clientList = clientList.OrderByDescending(s =&gt; s.RegistrationDate).ToList();
+            else
+                clientList = clientList.OrderBy(s =&gt; s.RegistrationDate).ToList();
+        }           
+    }
+    return clientList;
+}
+
+public List&lt;Customer&gt; ApplyFilters(List&lt;Customer&gt; clientList, ListFilterVM search)
+{
+    // If the last event was SEARCH (That means first event was Sort), Let's sort the results first before it the search criteria runs on it.
+    if ((!String.IsNullOrEmpty(search.LastEvent) &amp;&amp; (search.LastEvent.ToUpper() == "FILTER")))
+    {
+        clientList = SortClientList(clientList, search);
+    }
+    if (search.Filters != null)
+    {
+        foreach (var filter in search.Filters)
+        {
+            clientList = FilterWithName(clientList, filter).ToList();
+            clientList = FilterWithCity(clientList, filter).ToList();
+            clientList = FilterWithRegistrationDate(clientList, filter).ToList();              
+        }
+    }
+    if ((!String.IsNullOrEmpty(search.LastEvent)) &amp;&amp; (search.LastEvent.ToUpper() == "SORT"))
+    {
+        // If the last event was SORT (That means first event was Sort), Let's sort the results now
+        clientList = SortClientList(clientList, search);
+    }
+    return clientList;
+}
+private static IEnumerable&lt;Customer&gt; FilterWithName(IEnumerable&lt;Customer&gt; clientList, FilterVM filter)
+{
+    if ((!String.IsNullOrEmpty(filter.ColumnName)) &amp;&amp; (filter.ColumnName.ToUpper() == "FIRSTNAME"))
+    {
+        if (!String.IsNullOrEmpty(filter.SearchText))
+        {
+            if (filter.SearchType.ToUpper() == "CONTAINS")
+                clientList = clientList.Where(s =&gt; s.FirstName.ToUpper().Contains(filter.SearchText.ToUpper())).ToList();
+
+            else if (filter.SearchType.ToUpper() == "STARTSWITH")
+                clientList = clientList.Where(s =&gt; s.FirstName.StartsWith(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+            else if (filter.SearchType.ToUpper() == "ENDSWITH")
+                clientList = clientList.Where(s =&gt; s.FirstName.EndsWith(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+            else if ((filter.SearchType.ToUpper() == "EQUALS") || (filter.SearchType == "="))
+                clientList = clientList.Where(s =&gt; s.FirstName.Equals(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+        }
+    }
+    return clientList;
+}
+private static IEnumerable&lt;Customer&gt; FilterWithCity(IEnumerable&lt;Customer&gt; clientList, FilterVM filter)
+{
+    if ((!String.IsNullOrEmpty(filter.ColumnName)) &amp;&amp; (filter.ColumnName.ToUpper() == "CITY"))
+    {
+        if (!String.IsNullOrEmpty(filter.SearchText))
+        {
+            if (filter.SearchType.ToUpper() == "CONTAINS")
+                clientList = clientList.Where(s =&gt; s.City.ToUpper().Contains(filter.SearchText.ToUpper())).ToList();
+
+            else if (filter.SearchType.ToUpper() == "STARTSWITH")
+                clientList = clientList.Where(s =&gt; s.City.StartsWith(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+            else if (filter.SearchType.ToUpper() == "ENDSWITH")
+                clientList = clientList.Where(s =&gt; s.City.EndsWith(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+            else if ((filter.SearchType.ToUpper() == "EQUALS") || (filter.SearchType == "="))
+                clientList = clientList.Where(s =&gt; s.City.Equals(filter.SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+        }
+    }
+    return clientList;
+}
+private static IEnumerable&lt;Customer&gt; FilterWithRegistrationDate(IEnumerable&lt;Customer&gt; orderList, FilterVM filter)
+{
+    if ((!String.IsNullOrEmpty(filter.ColumnName)) &amp;&amp; (filter.ColumnName.ToUpper() == "REGISTRATIONDATE"))
+    {
+        if (!String.IsNullOrEmpty(filter.StartDate))
+        {
+            DateTime dateToCompare;
+            if (DateTime.TryParse(filter.StartDate, out dateToCompare))
+            {
+                if ((filter.SearchType.ToUpper() == "EQUALS") || (filter.SearchType == "="))
+                    orderList = orderList.Where(s =&gt; s.RegistrationDate.Date == dateToCompare.Date).ToList();
+
+                else if (filter.SearchType.ToUpper() == "BEFORE")
+                    orderList = orderList.Where(s =&gt; s.RegistrationDate.Date &lt; dateToCompare.Date).ToList();
+
+                else if (filter.SearchType.ToUpper() == "AFTER")
+                    orderList = orderList.Where(s =&gt; s.RegistrationDate.Date &gt; dateToCompare.Date).ToList();
+
+                else if (filter.SearchType.ToUpper() == "BETWEEN")
+                {
+                    DateTime endDateToCompare;
+                    if (DateTime.TryParse(filter.EndDate, out endDateToCompare))
+                    {
+                        orderList = orderList.Where(s =&gt; s.RegistrationDate.Date &gt; dateToCompare.Date &amp;&amp; s.RegistrationDate.Date &lt; endDateToCompare.Date).ToList();
+                    }
+                }
+            }
+        }
+    }
+    return orderList;
+}</pre>
+<p>These methods are pretty much self explanatory. So i am not going to explain what it does.</p>
+<p>Let's go ahead and make some changes to our Index action so that it will call our new methods.</p>
+<pre class="brush:csharp">public ActionResult Index(int? page, int? size, ListFilterVM filter = null)
+{
+    int pageNumber = 1;
+    int pageSize = 5;
+    if (page.HasValue)
+        pageNumber = page.Value;
+
+    if (size.HasValue)
+        pageSize = size.Value;
+
+    var customerList = customerService.GetCustomers();
+
+    if (filter != null)
+    {
+        customerList = customerService.ApplyFilters(customerList, filter);
+    }
+
+    int totalRowCount = customerList.Count();
+    int itemstoSkip = pageSize * (pageNumber - 1);
+    customerList = customerList.Skip(itemstoSkip).Take(pageSize).ToList();
+
+    var customerListVM = new CustomerListViewModel { Customers = customerList };
+    ApplyPagingInformation(pageNumber, pageSize, customerListVM.PagingDetails, totalRowCount);
+
+    if (Request.IsAjaxRequest())
+    {
+        // If it is an ajax request ( from Sorting/Filtering event or by clicking on a page number), send the response in JSON format
+        var pagingMarkup = RenderPartialView("TablePagingFooter", customerListVM.PagingDetails, new ViewDataDictionary { { "baseurl", Url.Action("Index", "Home") + "?c" } });
+        return Json(new { ListingMarkup = RenderPartialView("Partial/Index", customerListVM), PagingMarkup = pagingMarkup }, JsonRequestBehavior.AllowGet);
+    }
+    return View(customerListVM);
+}</pre>
+<p>&nbsp;</p>
+<p>You must have noticed that, We are calling the <code>RenderPartialView</code> method by passing a partial view name. So we need to have a partial view for the index. Create a new folder called "Partial" under the <code>Views/Home</code> folder and add a new partial view called Index. Add the below content to that file.</p>
+<pre class="brush:csharp">@model YourNamespaceHere.CustomerListViewModel
+@{
+    Layout=null;
+}    
+@foreach(var customer in Model.Customers)
+{
+    &lt;tr&gt;
+        &lt;td&gt;@customer.FirstName&lt;/td&gt;           
+        &lt;td&gt;@customer.City&lt;/td&gt;
+        &lt;td&gt;@customer.RegistrationDate.ToShortDateString()&lt;/td&gt;
+    &lt;/tr&gt;
+}</pre>
+<p>Now we will make few updates to the index view.</p>
+<p>1) Add a hidden input element to hold the order of sort/filter .</p>
+<pre class="brush:csharp">&lt;input type="hidden" id="tblMeta" data-pagenumber="1" data-lastevent="none" /&gt;</pre>
+<p>2) Add the below javascript function which builds the filter object and send to our Index method.</p>
+<pre class="brush:csharp">   function ApplyFilter(source, url) {
+
+        var sortColumn = "";
+        var sortOrder = "";
+        var activeSort = $("a.sort-active");
+        sortColumn = activeSort.attr("for");
+        sortOrder = activeSort.find("span.ktable-sort").attr("sortorder");
+
+        var searchObj = new Object();
+        searchObj.Filters = [];
+        $("form.ktableform").each(function () {
+            var _form = $(this);
+            var filterVM = { SearchType: _form.find("SELECT.ktable-searchtype").val(), ColumnName: _form.attr("for"), SearchText: _form.find("input.filter-input").val() };
+            if (_form.attr("data-type") == "date") {
+                filterVM.StartDate = _form.find("input.kTableDatePicker").first().val();
+                filterVM.EndDate = _form.find("input.kTableDatePicker").eq(1).val();
+            }
+            searchObj.Filters.push(filterVM);
+        });
+        searchObj.SortColumnName = sortColumn;
+        searchObj.SortType = sortOrder;
+        searchObj.LastEvent = source;
+
+        var listUrl = "@Url.Action("Index","Home")";
+        if (url != undefined)
+            listUrl = url;
+
+        $.ajax({
+            type: "POST", url: listUrl,
+            contentType: "application/json",
+            data: JSON.stringify(searchObj)
+        }).done(function (data) {
+            $("#tblList tr:gt(0)").remove();            
+            $('#tblList').append(data.ListingMarkup);
+            $("#tblFooter").html(data.PagingMarkup);
+        });
+    }</pre>
+<p>3) Update the <code>callBackOnFilter</code> and <code>callBackOnClear</code> methods to call the <code>ApplyFilter</code> method.</p>
+<pre class="brush:js">$("table").ktable({            
+    filterable: {
+        filterableColumnClassName: 'filterable',
+        callBackOnFilter: function (item) { $("#tblMeta").data("lastevent", "filter"); ApplyFilter("filter") },
+        callBackOnClear: function (item) { $("#tblMeta").data("lastevent", "filter"); ApplyFilter("filter") }
+    }
+});</pre>
+<p>&nbsp;</p>
+<p>If you want to enable sorting, Provide the sorting related properties of kTable plugin as well.</p>
+<pre class="brush:applescript">, sortable: {
+callBackOnAscending: function (a) {                
+    $("#tblMeta").data("lastevent", "sort");
+    ApplyFilter("sort");
+    }
+}</pre>
+<p>We will add a few more lines of js code to make the paging ajaxified now.</p>
+<pre class="brush:js">$(document).on("click", "a.gridPageNumber", function (e) {
+    e.preventDefault();
+    var url = $(this).attr("href");
+    var lastEvent = $("#tblMeta").data("lastevent");
+    ApplyFilter(lastEvent, url);           
+});</pre>
+<p>Now run the app, Provide some search values and click the "filter" button, you will see that the content is updated with the search. Also if sort is enabled, You can click on the cell headers and it will do the sorting.</p>
+<p>You can download the sample project i used to write this blog post from my <a href="https://github.com/kshyju/ASP-NET-MVC-Filter-With-KTable">github </a>page..  Post a comment or hit me in twitter  if you have any questions.</p>
+<p>&nbsp;</p>

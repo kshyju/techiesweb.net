@@ -1,0 +1,123 @@
+---
+layout: post
+title: ListBox and Dropdown list in asp.net mvc
+date: 2013-10-02 20:54:31.000000000 -04:00
+categories:
+- ASP.NET MVC
+tags:
+- Dropdown in asp.net mvc
+- DropdownListFor
+- ListBox in asp.net mvc
+status: publish
+type: post
+published: true
+meta:
+  _yoast_wpseo_linkdex: '74'
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: Dropdown list in asp.net mvc
+  _yoast_wpseo_title: ''
+  _yoast_wpseo_metadesc: Dropdown list and ListBox in ASP.NET MVC is possible with
+    the Html.DropdownListFor and Html.ListboxFor helper methods and viewmodels
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_sitemap-html-include: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+  _wpas_done_all: '1'
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Everyday i see atleast a question on stackoverflow regarding an issue with correctly bringing a dropdown list to the view. Most of the questions and answers are using the "ViewBag way" to bring data from the action method to the razor view. Even though it works, It is not the best practice to handle the dropdown problem in ASP.NET MVC.  Pepole should switch to the viewmodel approach to transfer data between action methods and views. I think it is a good idea to put a good example here to show how to bring ListBox and Dropdown list in asp.net mvc so that those who are new to mvc can follow the neat way of doing it.</p>
+<p>Let's say our requirement is to build a page to add a User where we will enter the name of user and select the city from a list of available cities. So to show this list we need to render a dropdown / SELECT element to our view for the city selection part. So Let's start with a viewmodel.</p>
+<h3>What is a ViewModel ?</h3>
+<p>Do not be scared ! Viewmodels are nothing but POCO's( Plain old class objects). These are simple classes which we uses to transfer data. They are specifically made for views. That means your viewmodel will have properties which are absolutely required in the view.</p>
+<p>So for our screen, we will create a viewmodel like this</p>
+<pre class="brush:csharp">public class AddUserVM
+{    
+    public string Name { set;get;}
+    public List&lt;SelectListItem&gt; Cities { set;get;}
+    public int SelectedCity { set;get;}
+
+    public AddUserVM()
+    {
+        Cities=new List&lt;SelectListItem&gt;();
+    }
+}</pre>
+<p>and in our GET Action method, We will create an object of this viewmodel, set the <code>Cities</code> property and send it to the view.</p>
+<pre class="brush:csharp">public ActionResult AddUser()
+{
+    var addUserVM = new AddUserVM();
+    addUserVM.Cities = GetCities();
+    return View(addUserVM);
+}</pre>
+<pre class="brush:csharp">private List&lt;SelectListItem&gt; GetCities()
+{
+    var cityList = new List&lt;SelectListItem&gt;();
+    //Hard coded for demo. You may get the items
+    // from a datasource and add to the list
+    cityList.Add(new SelectListItem { Value = "1", Text = "Ann Arbor" });
+    cityList.Add(new SelectListItem { Value = "2", Text = "Novi" });
+    return cityList;
+}</pre>
+<p>You can see that, I am using the <code>GetCities</code> method to fill the data to the Cities property of our viewmodel. For demo purpose, i hard coded 2 items to the list and returning it. You may update this part to read the data from your db tables/XML/APIs and load it to the list.</p>
+<p>And now we will make our razor view(AddUser.cshtml) a strongly typed one like below.</p>
+<pre class="brush:csharp">@model ReplaceYourNameSpaceHere.AddUserVM
+@using (Html.BeginForm())
+{
+    &lt;p&gt;
+        Name  @Html.TextBoxFor(s=&gt;s.Name)
+    &lt;/p&gt;
+    &lt;p&gt;
+        City @Html.DropDownListFor(s=&gt;s.SelectedCity,Model.Cities,"Select")
+    &lt;/p&gt;
+    &lt;input type="submit" /&gt;
+}</pre>
+<p>So here we are using the <code>Html.DropDownListFor</code> html helper to render the SELECT element.  When you run your page, you will get the out put like this where you have the Cities in the dropdown.</p>
+<p style="text-align: center;"><a href="http://www.techiesweb.net/wp-content/uploads/2013/10/ASP.NET_MVC_Dropdown_View.png"><img class="size-full wp-image-694 aligncenter" alt="ASP.NET_MVC_Dropdown_View" src="assets/ASP.NET_MVC_Dropdown_View.png" width="213" height="139" /></a></p>
+<p>If you look at the source of the HTML page, You can see that we have a form tag which has action method set to "Home/AddUser". So now let's write the HttpPost action method to handle the form submit.</p>
+<pre class="brush:csharp">[HttpPost]
+public ActionResult AddUser(AddUserVM model)
+{
+    if (ModelState.IsValid)            
+    {
+        // get the selected city
+        int city = model.SelectedCity;
+        // to do : Save and redirect (PRG patttern) instead of this demo code below
+        return View("Results", model);
+    }
+    //Reload the Cities collection again
+    model.Cities = GetCities();
+    return View(model);
+}</pre>
+<p>&nbsp;</p>
+<p>You can see that the parameter for our HttpPost action method is of type <code>AddUserVM</code>, the same as what our view is strongly typed to. MVC Model binding will bind the posted form data to our method parameter. To get the selected item's value, you can check the <code>SelectedCity</code> property.Inside the method, we are checking for validation and If everything goes good, we will save the data and redirect to another get action (to follow the PRG pattern). If validation fails, we are returning the model back to the view again so that user can correct it and re submit.</p>
+<h4>Why are we reloading the Cities collection again ?</h4>
+<p>The answer is "Because HTTP is stateless". It can not keep the dropdown data between http requests like web forms do (web forms do this with the ugly viewstate which we don't have here in ASP.NET MVC). So If we are returning the model back to the view, we need to reload the data again.</p>
+<h3>Listbox / Multi selectable dropdown</h3>
+<p>If you want a listbox/multi selectable dropdown, The only change you have to make is to change the type of the selected item property to an integer array.</p>
+<pre class="brush:csharp">public class AddUserVM
+{    
+    public string Name { set;get;}
+    public List&lt;SelectListItem&gt; Cities { set;get;}
+    public int[] SelectedCity { set;get;}
+
+    public AddUserVM()
+    {
+        Cities=new List&lt;SelectListItem&gt;();        
+    }
+}</pre>
+<p>Now when the user submits the form, the ids of the selected items will be available in the <code>SelectedCity</code> property which is an integer array.</p>
+<p>Sample project is uploaded to github for your reference. Link : <a href="https://github.com/kshyju/ASPNETMVCDropdownDemo">https://github.com/kshyju/ASPNETMVCDropdownDemo</a></p>

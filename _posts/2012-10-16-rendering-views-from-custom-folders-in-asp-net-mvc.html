@@ -1,0 +1,113 @@
+---
+layout: post
+title: Rendering views from custom folders in ASP.NET MVC
+date: 2012-10-16 19:24:17.000000000 -04:00
+categories:
+- ASP.NET MVC
+tags:
+- ".cshtml location"
+- ASP.NET MVC views location
+- Razor view location
+- Rendering views from custom folders
+- View location
+- Views
+- views from custom folders
+status: publish
+type: post
+published: true
+meta:
+  _yoast_wpseo_linkdex: '79'
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: Rendering views from custom folders
+  _yoast_wpseo_title: Rendering views from custom folders in ASP.NET MVC - TechiesWeb
+  _yoast_wpseo_metadesc: In ASP.NET MVC, Rendering views from custom folders other
+    than the default views folder is possible by extending the RazorViewEngine.
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>ASP.NET MVC works with the concept of <strong>Convention over Configuration</strong>. that means, the programmer do not need to explicitly do many things and MVC will take care of those if he follows the conventions. One good example is, To return a view, you simply write one line <code>Return View()</code> and it will return the view from the appropriate directory ( assuming the programmer followed the convention and kept the view file in <strong>~/Views/<em>ThatControllerName</em>/</strong> folder with same name as of the action method. but MVC is extensible. If you want to override the convention. you can always do that. This post shows how rendering views from custom folders in asp.net mvc is possible.</p>
+<p>By default, you will have a <strong>Views </strong>folder in root and you can have multiple folders under that with same name as of your controller name. Each of those folder will have views (<code>.cshtml</code> files) for your action methods. so the default structure will look like this for a controller called <code>CustomerController</code> with 3 action methods. <code>index</code>, <code>edit</code> and <code>details</code>.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/action-methods.png"><img class="alignnone size-full wp-image-554" title="action methods" src="assets/action-methods.png" alt="" width="430" height="280" /></a></p>
+<p>View directory structure</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/default-view-convention.png"><img class="alignnone size-full wp-image-553" title="default-view-convention" src="assets/default-view-convention.png" alt="" width="239" height="98" /></a></p>
+<p>&nbsp;</p>
+<h3>Returning view from a different location</h3>
+<p>If you want to return a view from a different location, you can do it by specifying the full path to the view file when calling the <code>View</code> method. for example, if you want to return a view (index.cshtml) from a folder called <strong>Customer </strong>under <strong>UI</strong> folder which is in the root of the application,  you can do it like this</p>
+<pre class="brush:csharp">public ActionResult Index()
+{
+    return View("~/UI/Customer/Index.cshtml");
+}</pre>
+<p>&nbsp;</p>
+<p>Assuming you have the <strong> <em>_viewStart.html</em></strong> and <strong> <em>web.config </em></strong>present in your <strong>UI </strong>folder.</p>
+<p>The above method works. but it is not a good solution to hardcode the location like this. What if we have a lots of controllers and action methods ? , are we going to hard code it like this ? No !!!</p>
+<p>What we can do is we can extend the razor view engine and tell it to look for views in our custom location.  so if you look at the sourcecode of <code>RazorViewEngine</code>, you can see that the default  location (what the convention follows) is there.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/razor-view-default-location.png"><img class="alignnone size-full wp-image-556" title="razor-view-default-location" src="assets/razor-view-default-location.png" alt="" width="726" height="686" /></a></p>
+<p>So let's extend the <code>RazorViewEngine</code> and create our own view engine. Remember that we are going to simply change the View's default location only. rest of the view functionality is going to be same (as of Razor). So we will create a class which extends from <code>RazorViewEngine</code> class and write code like this.</p>
+<pre class="brush:csharp">public class MyCustomViewEngine : RazorViewEngine
+{
+    public MyCustomViewEngine()
+    {
+        string[] viewLocationFormatArr=new string[4];
+        viewLocationFormatArr[0] = "~/UI/{1}/{0}.cshtml";
+        viewLocationFormatArr[1] = "~/UI/{1}/{0}.vbhtml";
+        viewLocationFormatArr[2] = "~/UI/Shared/{1}/{0}.vbhtml";
+        viewLocationFormatArr[3] = "~/UI/Shared/{1}/{0}.vbhtml";
+        this.ViewLocationFormats = viewLocationFormatArr;
+
+        string[] masterLocationFormatArr = new string[4];
+        masterLocationFormatArr[0] = "~/UI/{1}/{0}.cshtml";
+        masterLocationFormatArr[1] = "~/UI/{1}/{0}.vbhtml";
+        masterLocationFormatArr[2] = "~/UI/Shared/{1}/{0}.vbhtml";
+        masterLocationFormatArr[3] = "~/UI/Shared/{1}/{0}.vbhtml";
+        this.MasterLocationFormats = masterLocationFormatArr;
+
+        string[] partialViewLocationFormatArr = new string[4];
+        partialViewLocationFormatArr[0] = "~/UI/{1}/{0}.cshtml";
+        partialViewLocationFormatArr[1] = "~/UI/{1}/{0}.vbhtml";
+        partialViewLocationFormatArr[2] = "~/UI/Shared/{1}/{0}.vbhtml";
+        partialViewLocationFormatArr[3] = "~/UI/Shared/{1}/{0}.vbhtml";
+        this.ViewLocationFormats = partialViewLocationFormatArr;
+
+    }
+}</pre>
+<p>Here i updated only the View related things. I did not update the other 3 properties which handles the location for Areas. But it is going to be the same way. You can simply mention the new folder name and it will be fine.</p>
+<p><em><strong>RazorViewEngine</strong> class resides in <strong>System.Web.Mvc</strong> namespace which is in <strong>System.Web.Mvc</strong> dll</em></p>
+<p>Now what we need to do is to register our new ViewEngine. So let's go to the global.asax's <code>Application_Start</code> event, clear existing view engines and register our new one.</p>
+<pre class="brush:csharp">protected void Application_Start()
+{
+    ViewEngines.Engines.Clear();
+    var ourViewEngine = new MyCustomViewEngine();
+    ViewEngines.Engines.Add(ourViewEngine);
+
+    AreaRegistration.RegisterAllAreas();
+
+    WebApiConfig.Register(GlobalConfiguration.Configuration);
+    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+    RouteConfig.RegisterRoutes(RouteTable.Routes);
+    BundleConfig.RegisterBundles(BundleTable.Bundles);
+}</pre>
+<p>That is all you need to make it happen. Hit F5 and you can see your app is now bringing views from the <strong>UI </strong>folder, instead of the <strong>Views </strong>folder.</p>
+<p>&nbsp;</p>
+<p>You need to update the <strong>_viewStart.cshtml</strong><em> file to update the layout files location as well.</em></p>
+<pre class="brush:csharp">@{
+    Layout = "~/UI/Shared/_Layout.cshtml";
+}</pre>
+<p>Hope this helps. <a title="custom folders for views in asp.net mvc" href="http://www.techiesweb.net/wp-content/uploads/2012/10/CustomViewLocation.zip">Here</a> you can download a sample project which has the above approach implemented. Do not forget to say “Hi” to me, if this post was useful to you. :)</p>
+<p>&nbsp;</p>

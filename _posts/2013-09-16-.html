@@ -1,0 +1,47 @@
+---
+layout: post
+title: ''
+date: 2013-09-16 14:59:55.000000000 -04:00
+categories:
+- Misc
+tags: []
+status: draft
+type: post
+published: false
+meta:
+  _yoast_wpseo_sitemap-prio: "-"
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: ''
+  _yoast_wpseo_title: ''
+  _yoast_wpseo_metadesc: ''
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_linkdex: '0'
+  _yoast_wpseo_sitemap-html-include: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>You have a DataSet with datatables in it. You want to delete some records(rows) from the data table before using the dataset to bind to a grid view or sending that to another place. What you do for that ?</p>
+<p>To delete the record from the data set's data table, you can use the DataRow.Delete method.</p>
+<p>var dataTable = dataSet.Tables[0];</p>
+<p>int rowIndex=0;</p>
+<p>foreach (DataRow dRow in dataTable.Rows)<br />
+{</p>
+<p>dataTable.Rows[rowIndex].Delete();</p>
+<p>rowIndex++</p>
+<p>}</p>
+<p>Now let's say you are using this modified data set as the data source to bind to a datagrid</p>

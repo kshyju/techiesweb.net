@@ -1,0 +1,78 @@
+---
+layout: post
+title: ASP.NET MVC How to get Model Error details in Controller Action Method When
+  ModelValidation fails
+date: 2012-09-11 23:29:55.000000000 -04:00
+categories:
+- ASP.NET MVC
+- Tips &amp; Tricks
+tags:
+- ASO.NET MVC3
+- ASP.NET MVC
+- IsValid
+- model error
+- ModelState
+- ModelValidation
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _aioseop_keywords: ModelValidation, ASP.NET MVC3, ModelState, ModelBinding, MVC
+  _aioseop_description: When ModelState.IsValid returns false and we want to know
+    what are the validation errors in the action method, We can use ViewData.ModelState.Values
+    collection.
+  _aioseop_title: How to get Model Error details in Controller Action Method When
+    ModelValidation fails
+  _yoast_wpseo_linkdex: '56'
+  _yoast_wpseo_focuskw: model error
+  _yoast_wpseo_title: How to get Model Error details in controller action method in
+    mvc3
+  _yoast_wpseo_metadesc: How to get Model Error details in controller action method
+    in mvc3
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>When Working with MVC Model Validations, You may come across a situation where you think you filled all the Required Items in the Form and submitted, but still the <code>ModelState.IsValid</code> property is returning false. I came across this scenario once when i was inherting  a ViewModel from another ViewModel. How do we know what is causing the IsValid property to return false ?</p>
+<p>You can check the <code>ViewData.ModelState.Values</code> collection and see what are the Errors. Here is the sample code</p>
+<p>&nbsp;</p>
+<pre class="brush:csharp">[Httpost]
+public ActionResult Create(User model)
+{
+   if(ModelState.IsValid)
+   {
+     //Save and redirect
+   }
+   else
+   {
+     foreach (var modelStateVal in ViewData.ModelState.Values)
+     {
+       foreach (var error in modelStateVal.Errors)
+       {               
+          var errorMessage = error.ErrorMessage;
+          var exception = error.Exception;
+          // You may log the errors if you want
+       }
+     }
+   }         
+   return View(model);
+ }
+}</pre>
+<p>&nbsp;</p>

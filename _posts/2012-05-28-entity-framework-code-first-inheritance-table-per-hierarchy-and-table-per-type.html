@@ -1,0 +1,85 @@
+---
+layout: post
+title: 'Entity Framework Code First Inheritance : Table Per Type and Table Per Hierarchy'
+date: 2012-05-28 06:24:03.000000000 -04:00
+categories:
+- codefirst
+- CodeProject
+- EntityFramework
+tags:
+- abstract base class inheritance
+- Codefirst
+- Entity Framework
+- Entity Framework CodeFirst
+- Inheritance
+- Table Per Hierarchy
+- Table Per Type
+- TPH
+- TPT
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _aioseop_title: 'Entity Framework Code First Inheritance : Table Per Hierarchy and
+    Table Per Type'
+  _aioseop_description: How entity Framework handles Inheritance.  Table Per Hierarchy
+    and Table Per Type are the two methods to handle inheritance. By default, Entity
+    framework code first uses Table Per Hierarchy method to handle inheritance when
+    creating tables from entities.  in TPH, All Data in the hierarchy will be saved
+    in a single database table and it uses a Discriminator column to indentify which
+    record belongs to which sub type.  The value of this column will be the name of
+    the subtype.
+  _aioseop_keywords: Table Per Hierarchy, TPH, TPT, Table Per Type, Entity Framework  Code
+    First, Abstract base class
+  _yoast_wpseo_linkdex: '55'
+  _yoast_wpseo_focuskw: Table Per Type
+  _yoast_wpseo_title: ''
+  _yoast_wpseo_metadesc: 'Entity Framework code first  creates database tables from
+    Model classes in two ways, Table Per Type and Table Per Hierarchy '
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Recently i <a href="http://stackoverflow.com/a/10420303/40521">answered </a>a question in <a href="http://stackoverflow.com/questions/10420075/querying-by-base-type-in-ef4-code-first/10420303#10420303">stackoverflow </a>about how to create separate tables for each sub type when handling inheritance. Today i thought of expanding it with some sample source code and share it here.</p>
+<p>While working with data driven applications, Some times we need to implement Inheritance in our code as well as the data storage. Let's take a look at how Entity Framework CodeFirst handles this</p>
+<h2><strong>Table Per Hierarchy (TPH)</strong></h2>
+<p>By default, Entity framework code first uses<strong> Table Per Hierarchy</strong> method to handle inheritance when creating tables from entities.  in TPH, All Data in the hierarchy will be saved in a single database table and it uses a <strong>Discriminator</strong> column to indentify which record belongs to which sub type.  The value of this column will be the name of the subtype.</p>
+<p>Le'ts take an example.</p>
+<p>I have a base class called <em><strong>Vehicle</strong></em> from where I am inheriting a <em><strong>Car</strong></em> class and a <em><strong>MotorCycle</strong></em> class.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/classes.png"><img class="alignnone size-full wp-image-236" title="classes" src="assets/classes.png" alt="" width="449" height="348" /></a></p>
+<p>So CodeFirst will create a table like this. All the properties in the inheritance hierarchy is in the same table with the <strong>Discriminator</strong> field.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/TPH-single-table.png"><img class="alignnone size-full wp-image-237" title="TPH-single-table" src="assets/TPH-single-table.png" alt="" width="413" height="193" /></a></p>
+<p>If you look at the data ( after adding some via the application), it will be like this. You can see that the value of Discriminator column is the name of the type.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/SingleTableData.png"><img class="alignnone size-full wp-image-238" title="SingleTableData" src="assets/SingleTableData.png" alt="" width="476" height="216" /></a></p>
+<p>The records with Discriminator value as "Car" are the records for <em><strong>Car</strong></em> type and the records with Discriminator value as "Motorcycle" are for <strong><em>Motorcycle</em></strong> entity. Note the <em>HandleBarColor</em> is null for the first two records because those records are for the <em><strong>Car</strong></em> type and we don't have a property for the Car type in our inheritance hierarchy. So it became NULL.</p>
+<p>&nbsp;</p>
+<h2><strong>Table Per Type (TPH)</strong></h2>
+<p>In <strong>Table per Type</strong> method,  Entity Framework CodeFirst will create a table for the base class ( with the base class properties as the columns) and individual tables for each subtype in the hierarchy. To do this, we can override the<em><strong> OnModelCreating</strong></em> method of <em><strong>DBContext</strong></em> and write some fluent API Code.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/fluent-api.png"><img class="alignnone size-full wp-image-247" title="fluent-api" src="assets/fluent-api.png" alt="" width="566" height="156" /></a></p>
+<p>As a result, Now our tables will be like this.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/TPT-vehicle.png"><img class="alignnone size-full wp-image-240" title="TPT-vehicle" src="assets/TPT-vehicle.png" alt="" width="344" height="100" /></a></p>
+<p>&nbsp;</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/tpt-car.png"><img class="alignnone size-full wp-image-241" title="tpt-car" src="assets/tpt-car.png" alt="" width="309" height="100" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/tpt-motor-cycle.png"><img class="alignnone size-full wp-image-242" title="tpt-motor-cycle" src="assets/tpt-motor-cycle.png" alt="" width="354" height="94" /></a></p>
+<p>And the data will look like this</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/alltabledata.png"><img class="alignnone size-full wp-image-243" title="alltabledata" src="assets/alltabledata.png" alt="" width="354" height="368" /></a></p>
+<p>&nbsp;</p>
+<p>Note the ID value of the Derived type tables are same as the Identity column value of the base type record.</p>
+<p>I hope this gives you some basic idea about how entity framework handles inheritance when doing <strong><em>code first</em></strong> way of development. You can download the sample source code which i used in the post <a href="http://www.techiesweb.net/wp-content/uploads/2012/05/CodeFirstTypeHierarchy.rar">here</a>. Don’t forget to leave me a comment, if this post helps you.</p>

@@ -1,0 +1,105 @@
+---
+layout: post
+title: Pluggable ASP.NET MVC application project structure
+date: 2013-02-08 02:28:36.000000000 -05:00
+categories:
+- ASP.NET
+- ASP.NET MVC
+tags:
+- ASP.NET MVVC 4
+- Loosely coupled
+- modular programs
+- Pluggable
+- Pluggable ASP.NET MVC project structure
+- plugin based development
+status: publish
+type: post
+published: true
+meta:
+  _yoast_wpseo_linkdex: '79'
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: Pluggable ASP.NET MVC application project structure
+  _yoast_wpseo_title: Pluggable ASP.NET MVC application project structure - TechiesWeb
+  _yoast_wpseo_metadesc: Creating loosly coupled pluggable ASP.NET MVC application
+    project structure is easy with the help of ASP.NET MVC Areas.
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+  _wp_old_slug: pluggable-asp-net-mvc-application-architecture
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Developing loosely coupled modular programs is a good idea because it eliminates the risk of recompilation. This way of development strategy lets you to create modules and deploy it without recompiling the entire project. You will have a main project and multiple modules on top of that. something similar to wordpress core and wordpress plugins does. Here i am explaining,  how to develop a pluggable ASP.NET MVC application project structure.</p>
+<h4><span style="font-size: 1em;">Step 1</span></h4>
+<p>Create a new ASP.NET MVC Project.  This will be our core project and we will be adding different modules to this as needed.  You will see a project structure like this in your solution explorer. Since i opted for the "<strong>Empty</strong>" project template, the controllers folder is empty.</p>
+<p style="text-align: center;"><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step1-create-core-project.png"><img class="size-full wp-image-640 aligncenter" alt="step1-create-core-project" src="assets/step1-create-core-project.png" width="176" height="226" /></a></p>
+<h4>Step 2</h4>
+<p>Now let's create a controller and it's views to this project. I will add a "Home" controller and it's "index" action and it's view. I added some text to the <em>index.cshtm</em>l file and when i run the project, we can see the output like this.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step2-add-controller-and-view.png"><img class="alignnone size-full wp-image-643" alt="step2-add-controller-and-view" src="assets/step2-add-controller-and-view.png" width="332" height="126" /></a></p>
+<h4>Step 3</h4>
+<p>Our next step is to create a folder for our modules. All of our modules are going to be an area on top of our main(Core) projecct.  So we will create a folder called "Areas" in the Core Project. I have also deleted the "<strong><em>Models</em></strong>" folder and "<em><strong>App_data</strong></em>" folder because we are not using that now.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step3-add-areas-folder.png"><img class="alignnone size-full wp-image-644" alt="step3-add-areas-folder" src="assets/step3-add-areas-folder.png" width="192" height="206" /></a></p>
+<p>Now if you check the physical location of our Core project, you will see the <em><strong>Areas</strong> </em>folder there. We will be using this as the location for our modules.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step3-areas-folder-in-project-location.png"><img class="alignnone size-full wp-image-645" alt="step3-areas-folder-in-project-location" src="assets/step3-areas-folder-in-project-location.png" width="236" height="206" /></a></p>
+<p>&nbsp;</p>
+<h4>Step 4</h4>
+<p>Now we will add our first module. Right click on the solution explorer and select <em><strong>Add-&gt;New Project</strong> </em>from the context menu. You will see the "Add New Project" dialog. Select "ASP.NET MVC4 Web application". Specify the project name and <strong>s</strong><em><strong>elect the project location same as the path to our Areas folder</strong></em>.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step4-add-module-project.png"><img class="alignnone size-full wp-image-646" alt="step4-add-module-project" src="assets/step4-add-module-project.png" width="539" height="310" /></a></p>
+<p>&nbsp;</p>
+<p>This will add the new project to our solution and it will be saved in the "<em><strong>Areas</strong></em>" folder of the main project. If you select the "Areas" folder in the main project and enable the "Show all files" option, you can see that our new project (Forum) is available under the <em><strong>Areas</strong> </em>folder.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step5-module-in-areas.png"><img class="aligncenter size-full wp-image-648" alt="step5-module-in-areas" src="assets/step5-module-in-areas.png" width="205" height="418" /></a></p>
+<h4>Step 6</h4>
+<p>Our next step is to change the assembly output path location of our module project. Select the <em><strong>Forum</strong> </em>project, right click and select <em><strong>properties</strong> </em>from the context menu. Go to <em><strong>Build</strong> </em>tab. You will see a section called "<em><strong>Output</strong></em>". There is a property called "Output path" Where you can define where the assemblies of this project should go when we build the project. By default the value will be <code>bin\\</code> . Change the value to <code>..\\..\\bin\\</code> so that it will drop the compiled assemblies to the <strong>bin</strong> folder of our main project (Core).</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2013/02/step6-set-output-path.png"><img class="aligncenter size-full wp-image-649" alt="step6-set-output-path" src="assets/step6-set-output-path.png" width="461" height="114" /></a></p>
+<h4>Step 7</h4>
+<p>Now we will inherit the <em><strong>AreaRegistration</strong> </em>class and override some items from that. So Let's add the below class to our module project.</p>
+<pre class="brush:csharp">public class ForumAreaRegistration : AreaRegistration
+{
+    public override string AreaName
+    {
+        get { return "Forum";  }
+    }
+    public override void RegisterArea(AreaRegistrationContext context)
+    {
+        context.MapRoute(
+            "forum_default",
+            "Forum/{controller}/{action}/{id}",
+            new { action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "Forum.Controllers" }
+        );
+    }
+}</pre>
+<p>I will add this class to the <em><strong>App_Start</strong> </em>folder of the Forum Project. You can see that we overrode the <em><strong>AreaName</strong> </em>property and <em><strong>RegisterArea</strong> </em>method in this class. We have provided the area specific routing ( in this case Forum) in the <em><strong>RegisterArea</strong> </em>method.</p>
+<p>You need to update the <em><strong>RegisterRoutes</strong> </em>method of Core project to include the namespace while defining routes. This  is to avoid the conflict between the controllers with same name which exists in both the projects.  So your route defenition (of core project) will looks like this</p>
+<pre class="brush:csharp">public static void RegisterRoutes(RouteCollection routes)
+{
+    routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+    routes.MapRoute(
+        name: "Default",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+        namespaces: new string[] { "Core.Controllers" }
+    );
+}</pre>
+<p>&nbsp;</p>
+<p>Now build your Forum project and then run the main project. You may access the pages from core project and the module and see what it brings.</p>
+<p>[caption id="attachment_651" align="aligncenter" width="309"]<a href="http://www.techiesweb.net/wp-content/uploads/2013/02/core-project-page.png"><img class="size-full wp-image-651" alt="Page of Core project" src="assets/core-project-page.png" width="309" height="86" /></a> Page of Core project[/caption]</p>
+<p>[caption id="attachment_652" align="aligncenter" width="363"]<a href="http://www.techiesweb.net/wp-content/uploads/2013/02/page-of-module.png"><img class="size-full wp-image-652" alt="Page from module" src="assets/page-of-module.png" width="363" height="107" /></a> Page from module[/caption]</p>
+<p>&nbsp;</p>
+<p>The advantage of this pluggable architecture is, you can make some changes to one of your module and simply drop the assembly for that (and related view files if necessary) to the  bin folder of the main project.</p>
+<p>The sample project i created for this blog post is available <a href="https://github.com/kshyju/PluggableMVC">here </a>for download. Enjoy. Do not forget to say “Hi” to me, if this post was useful to you.</p>

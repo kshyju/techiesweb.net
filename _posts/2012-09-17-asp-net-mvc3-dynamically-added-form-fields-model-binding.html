@@ -1,0 +1,150 @@
+---
+layout: post
+title: ASP.NET MVC3 Dynamically added form fields model binding
+date: 2012-09-17 19:57:49.000000000 -04:00
+categories:
+- ASP.NET MVC
+tags:
+- ASP.NET MVC
+- asp.net mvc3
+- asp.net mvc3 dynamic field model binding
+- asp.net mvc3 dynamic form
+- asp.net mvc3 model binding
+- inline editing
+- mvc3 dynamic forms
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _yoast_wpseo_linkdex: '79'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: MVC3 dynamically added form fields model binding
+  _yoast_wpseo_title: ASP.NET MVC3 Dynamically added form fields model binding
+  _yoast_wpseo_metadesc: This post explains how ASP.NET MVC3 Dynamically added form
+    fields model binding works when you add form elements and submit it to your HttpPost
+    action .
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Adding  new Item to a list of items, inline is a very nice feature you can provide to your user. This posts shows 2 different ways to do this in ASP.NET MVC3 and how Modelbinding handles that.</p>
+<h2>MVC3 dynamically added form fields model binding</h2>
+<p>We are going to create a new page where it lists the various Programming Interests a user has.  The user will have an option to add a new Record ( Programming interest) to the list present.</p>
+<p>Let's create 2 ViewModels(ViewModel is a simple POCO class) for our views. Add the below 2 classes to our project.</p>
+<pre class="brush:csharp">public class User
+{
+    public int Id { set; get; }
+    public string Name { get; set; }   
+    public IList&lt;UserInterest&gt; Interests { get; set; }
+}
+public class UserInterest
+{
+    public int Id { set; get; }
+    public string InterestText { set; get; }
+    public bool IsExperienced { set; get; }
+}</pre>
+<p>Now I am going to create a <code>GET</code> action which returns a <code>User</code> class object with his interests.</p>
+<pre class="brush:csharp">public ActionResult ClientSideCreation()
+{
+    var usr = new User();
+    usr.Name = "Jon Skeet";
+    usr.Interests = GetUserInterests();
+    return View(usr);
+}</pre>
+<p>This action is simply creating an object and setting the Name property and Setting the Interests collection. <code>GetUserInterests</code> is a method which returns a list of <code>UserInterest</code> object.</p>
+<p>Now to handle the collection Property of our Model, Let's create an <strong>Editor template</strong> called  <code>UserInterest.cshtml</code> under <code>Home\EditorTempaltes</code>.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template.png"><img class="size-full wp-image-360" title="editor-template" src="assets/editor-template.png" alt="Editor Template" width="292" height="83" /></a></p>
+<p>Now we will use <code>Html.EditorFor</code> HTML Helper method to bring this editor template to our main view.</p>
+<pre class="brush:csharp">@model MvcApplication2.Models.User
+@using(Html.BeginForm())
+{ 
+ &lt;h3&gt;Name : @Model.Name&lt;/h3&gt;
+ &lt;h4&gt;Interests&lt;/h4&gt;   
+ &lt;div class="divIntersts"&gt;
+    &lt;table  id="container"&gt;
+     &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Have Experience?&lt;/th&gt;
+     &lt;/tr&gt;
+     @Html.EditorFor(x =&gt; x.Interests)    
+    &lt;/table&gt;   
+ &lt;/div&gt;
+ &lt;p&gt;&lt;input type="submit" value="Save" /&gt;&lt;/p&gt;
+}</pre>
+<p>We are done with that. Running the project will show the output like this.<br />
+<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template-view-rendered.png"><img class="alignnone size-full wp-image-364" title="editor-template-view-rendered" src="assets/editor-template-view-rendered.png" alt="EditorTemplate showing a collection of Items" width="353" height="214" /></a></p>
+<p>note that this does not have any feature for the user to add the new record to the collection.</p>
+<h2>Adding Record Inline</h2>
+<p>I am going to make some changes to our view.</p>
+<p><strong>1) </strong>Add a button called " <em><strong>Add new Item </strong></em>" to our html markup.</p>
+<pre>&lt;input type="button" id="btnAdd" value="Add New Item" /&gt;</pre>
+<p><strong>2)</strong> Add some javascript code to create the form fields when user clicks on the <em><strong>Add New Item</strong></em> button and append that to our table which holds the collection.</p>
+<pre class="brush:js">    $(function () {
+        $("#btnAdd").click(function (e) {
+            var itemIndex = $("#container input.iHidden").length;
+            e.preventDefault();
+            var newItem = $("&lt;tr&gt;&lt;td&gt;&lt;input id='Interests_" + itemIndex + "__Id' type='hidden' value='' class='iHidden'  name='Interests[" + itemIndex + "].Id' /&gt;&lt;input type='text' id='Interests_" + itemIndex + "__InterestText' name='Interests[" + itemIndex + "].InterestText'/&gt;&lt;/td&gt;&lt;td&gt;&lt;input type='checkbox' value='true'  id='Interests_" + itemIndex + "__IsExperienced' name='Interests[" + itemIndex + "].IsExperienced' /&gt;&lt;/tr&gt;");
+            $("#container").append(newItem);
+        });
+    });</pre>
+<p>So the result of running our updated project will be like this. there is a "<em><strong>Add New Item</strong></em>" button and clicking that will add new record to our existing table.<br />
+<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/newItem-added1.png"><img class="alignnone size-full wp-image-380" title="newItem-added" src="assets/newItem-added1.png" alt="" width="327" height="180" /></a></p>
+<p>Now When the user posts the form, the MVC Model binding feature will bind the newly added items as well. You can check that by putting a breakpoint in the HttpPost action method.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/httpposted.png"><img class="alignnone size-full wp-image-373" title="httpposted" src="assets/httpposted.png" alt="" width="692" height="220" /></a></p>
+<p>&nbsp;</p>
+<p>The trick is to keep the <strong>id</strong> property value of the html element in this format.</p>
+<p><code>CollectionName_<em>ItemIndex</em>__PropertyName</code></p>
+<p>and <strong>name</strong> property value in this format</p>
+<p><code>CollectionName[<em>ItemIndex</em>].PropertyName</code></p>
+<p>If your Collection item has many fields, It will be hard to write javascript code for creating the form elements. In that case, You may consider doing it in the server side.</p>
+<p>So i will update my javascript code like this.</p>
+<pre class="brush:js">$(function () {
+    $("#btnAdd").click(function (e) {
+        var itemIndex = $("#container input.iHidden").length;       
+        e.preventDefault();
+        $.get("@Url.Action("NewInterestRow", "Home")/"+itemIndex,function(data){
+            $("#container").append(data);
+        });           
+    });
+});</pre>
+<p>You can see that we are not building the html in our client side code here. Instead we are mkaing an ajax call to the <code>NewInterestRow</code> action method and passing the Index of the new item. So we need to create that action method like this.</p>
+<pre class="brush:csharp">public ActionResult NewInterestRow(int id)
+{
+    var interest = new UserInterest { Id=id};
+    return View("Partial/NewInterestRow",interest);
+}</pre>
+<p>&nbsp;</p>
+<p>It simply creates an object of our <code>UserInterest</code> class and set the <code>Id</code>  property value of it as the values passed to this method (which is the Item Index of the new item to be created) .Then we are passing that object to a partial view called <code>NewInterestRow</code>. So Lets create a new View under <code>Home/Partial</code> called <code>NewInterestRow.cshtml</code> with the below content.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<pre class="brush:csharp">@model MvcApplication2.Models.UserInterest
+@{    Layout = null; }
+&lt;tr&gt; 
+ &lt;td&gt;
+  &lt;input type="hidden" id="Interests_@(Model.Id)__Id" class="iHidden"  name='Interests[@Model.Id].Id' /&gt;
+  &lt;input type='text' id='Interests_@(Model.Id)__InterestText'   name='Interests[@Model.Id].InterestText'/&gt;
+ &lt;/td&gt;
+ &lt;td&gt;
+    &lt;input type='checkbox' value='true'  id='Interests_@(Model.Id)__IsExperienced' name='Interests[@Model.Id].IsExperienced' /&gt;
+ &lt;/td&gt;
+&lt;/tr&gt;</pre>
+<p>This View also creates the same HTML elements we created at client side previously, with the same name /ID convention we need for the Model binding to work.</p>
+<p>&nbsp;</p>
+<p><strong>Summary :</strong> Here we showed 2 ways to add dynamic form fields to an existing collection which gives a nice user experience and how MVC Model binding works for those new elements. The main thing to remember is to keep the format of the <strong>name</strong> and <strong>id</strong> property values. Model binding will work for the new elements only if they follow the format.</p>
+<p>You can download the sample source code <a href="http://www.techiesweb.net/wp-content/uploads/2012/09/DynamicForm.rar">here</a> to see how it works.</p>
+<p>&nbsp;</p>

@@ -1,0 +1,96 @@
+---
+layout: post
+title: Starting Entity Framework Codefirst Approach Part- 2
+date: 2012-05-05 04:59:55.000000000 -04:00
+categories:
+- codefirst
+- CodeProject
+- EntityFramework
+tags:
+- Codefirst
+- data-annotations
+- Entity Framework
+- Entity Framework CodeFirst
+- fluent-api
+- fluent-api configuration
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_linkdex: '61'
+  _yoast_wpseo_focuskw: 'Entity Framework Codefirst '
+  _yoast_wpseo_title: Starting Entity Framework Codefirst Approach Part- 2 - TechiesWeb
+  _yoast_wpseo_metadesc: Entity Framework Codefirst data annotations and Fluent API,
+    Mapping columns as foriegn key/ Primary key
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>This is the second part of my Entity Framework Codefirst  Tutorial for beginners. If you want to start fresh , Visit the <a href="http://techiesweb.net/starting-entity-framework-codefirst-approach-part-1/">first part here</a>.</p>
+<p>If you tried the first part, while creating the database using code first approach, you might have noticed that our columns of string type is created as nullable columns of type nvarachar and is having the MAX size.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/table-with-no-datatype-length.png"><img class="alignnone size-full wp-image-181" title="table-with-no-datatype-length" src="assets/table-with-no-datatype-length.png" alt="" width="385" height="245" /></a></p>
+<p>&nbsp;</p>
+<p>Obviously it is not a good idea to create table columns like this. We need to be more specific about what we are going to built and work with. So if you want to specify the size  /nullabilty, we can do that as well in few different ways</p>
+<p><strong>1) Data Annotation</strong></p>
+<p>Data Annotations are attributes we can apply to the class members. By decorating a class memmber / Property with data annotation, we can achieve the<br />
+following things</p>
+<p>1) Impose some validations on the entity<br />
+2) Specify how the data is gonna look like in the UI when displayed<br />
+3) Specify some relationships between entities</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Let us simply decorate our customer class attributes with some data annotations</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/adding-required-and-string-length.png"><img class="alignnone size-full wp-image-177" title="adding-required-and-string-length" src="assets/adding-required-and-string-length.png" alt="" width="491" height="346" /></a></p>
+<p>&nbsp;</p>
+<p>So what are we getting out of this ?  Run the project and see what change it brings to our database.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/after-applying-data-annotations.png"><img class="alignnone size-full wp-image-179" title="after-applying-data-annotations" src="assets/after-applying-data-annotations.png" alt="" width="387" height="240" /></a></p>
+<p>&nbsp;</p>
+<p>The <strong>Required</strong> Attribute made our column to be a not null column and the<strong> Max Length</strong> Attribute value become the size of the column.</p>
+<p>&nbsp;</p>
+<p><strong>2) Fluent API</strong></p>
+<p>Fluent API is another way to configure the Entitiy Properties or the relationship among the entities.   What we did with data annotations in the above example can be achieved with Fluent API as well. Why do we need to use Fluent API over Data Annotations or vice versa  ? Well , I guess it is more of a personal preference. Some people like to keep their classes clean. They just want to have the proeprty definition only in the classes and dont want to to define these attributes  in that class. Fluent API helps those people to keep these configuration in a different place.</p>
+<p>Entity framework will generate the database by looking at the classes we have (not all the classes, but those classes which are using inside our DBContext class to create properties of type DBSet.) created. So There is a way we can override some of the configuration. There is an overridable method called <strong>OnModelCreating</strong> inside DBContext.  So we can override that in our DbContext class  to specify some of the configuration we want to apply when entity framework creates tables for us from the classes.</p>
+<p>I am going to create another entity class to show this. Let us create a class called <strong>Address</strong> under our Model folder.  Add Properties like below to the Address entity.</p>
+<p>Wait :  Include a rerence to  System.ComponentModel.DataAnnotations namespace in this class with a <strong><em>using System.ComponentModel.DataAnnotations statement</em></strong>.  We are going to use the data annotations present in this namespace in our class</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/AddressEntity.png"><img class="alignnone size-full wp-image-183" title="AddressEntity" src="assets/AddressEntity.png" alt="" width="464" height="198" /></a></p>
+<p>Note that we did not add any data annotations to the properties of the Address class. So when we run the project, EF will create nullable nvarchar columns with MAX length for all those string properties.</p>
+<p>Now To override the default configuration , Go to our DBContext class (SampleContext.cs) and add the below method.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/onModelCreating-1.png"><img class="alignnone size-full wp-image-184" title="onModelCreating-1" src="assets/onModelCreating-1.png" alt="" width="651" height="91" /></a></p>
+<p><strong>Tip</strong> : You may simply type "<strong>override</strong>" inside the class and VisualStudio intellisense will show you all virtulal methods available to be overridden. Just select<strong> OnModelCreating</strong> from that.</p>
+<p>We can now use the DBModelBuilder object which is an argument of this method, to configure our entity / entity properties.  Add some configurations in this method like below.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/onModelCreating-2.png"><img class="alignnone size-full wp-image-185" title="onModelCreating-2" src="assets/onModelCreating-2.png" alt="" width="640" height="277" /></a></p>
+<p>This code is pretty much self explanatory. It is saying that The Address Line1 Property of Address Entity should be Required field (not null) and should have a Max length of 100 (the column size). Run the project and see what output we are getting.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/onModelCreating-3.png"><img class="alignnone size-full wp-image-186" title="onModelCreating-3" src="assets/onModelCreating-3.png" alt="" width="454" height="251" /></a></p>
+<p>You can see that we are chaining methods here. That is something beautiful about this approach.</p>
+<p>What if I have so many entities  ? I will have so much of code in this method and that is worse ! We dont want to do that. Wait !  there is a much better approach.  Little more refactoring ! We can move the configurations for an entity in a different class and just specify it in our OnModelCreating method. To show that, Let me add another class to our model folder called PhoneNumbers</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/phonenumber.png"><img class="alignnone size-full wp-image-187" title="phonenumber" src="assets/phonenumber.png" alt="" width="454" height="142" /></a></p>
+<p>Now to define the confiration ,  we will create another class called PhoneNumberConfiguration. We will inherit this class from EntityTypeConfiguration and specify the type while inheriting. In the Constructor we can define our configuration like this.</p>
+<p>&nbsp;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/phonenumberConfigutation1.png"><img class="alignnone size-full wp-image-190" title="phonenumberConfigutation" src="assets/phonenumberConfigutation1.png" alt="" width="575" height="215" /></a></p>
+<p>Now we will go back to our OnModelBuilder method and add the PhoneNumber configuration class instance to the Configurations property of modelBuider.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/phonenumberConfigutationAdding.png"><img class="alignnone size-full wp-image-189" title="phonenumberConfigutationAdding" src="assets/phonenumberConfigutationAdding.png" alt="" width="654" height="95" /></a></p>
+<p>&nbsp;</p>
+<p>And you will see the results as</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/05/phonenumberConfigutationAddrdResults.png"><img class="alignnone size-full wp-image-191" title="phonenumberConfigutationAddrdResults" src="assets/phonenumberConfigutationAddrdResults.png" alt="" width="503" height="114" /></a></p>
+<p><strong>TIP</strong> : you need to include <strong>System.Data.Entity.ModelConfiguration</strong> namespace in your PhoneNumber configuration class as  EntityTypeConfiguration class belongs to that.</p>
+<p>You can download the source code of this example <a href="http://techiesweb.net/wp-content/uploads/2012/05/EFCodeFirst-Part-2.rar">here  </a>for references.  Leave a comment if you download the source code from this page / this article helped you.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

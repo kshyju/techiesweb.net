@@ -1,0 +1,82 @@
+---
+layout: post
+title: NUnit with  ASP.NET MVC and CodeRush
+date: 2012-03-23 20:58:00.000000000 -04:00
+categories:
+- ASP.NET MVC
+- UnitTesting
+tags:
+- CodeRush
+- UnitTesting
+status: publish
+type: post
+published: true
+meta:
+  _yoast_wpseo_linkdex: '0'
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Adding unit tests to your projects is one of the important thing in all the projects. Unit tests are the smallest testable parts of our application which ensures our code works as expected before we move to integrating our stuff into other modules or code. A unit test provides strict written contract that the piece of code should satisfy.</p>
+<p>&#160;</p>
+<p>CodeRush is a Developer Productivity Tool from DevExpress.&#160; I started using it a week ago and I should say its so cool.&#160; You can download a 30 day trial version from <a href="http://devexpress.com/Products/Visual_Studio_Add-in/Coding_Assistance/" target="_blank">here</a>. I am using the same 30 day trial version now but hoping to get a licensed version in few days as I won one in a raffle happened in our local dot net user group monthly session.</p>
+<p>&#160;</p>
+<p>Lets see how we will&#160; handle unit tests with nunit in&#160; an ASP.NET MVC project.</p>
+<p>&#160;</p>
+<p> So I have an ASP.NET MVC project here.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image20.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb20.png" width="260" height="341" /></a></p>
+<p>&#160;</p>
+<p>To add a unit test project, simply right click on the solution and add a new class library project.</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image21.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb21.png" width="280" height="188" /></a></p>
+<p>&#160;</p>
+<p>I will delete the default “Class1.cs” file because I don’t want any files in my solution which is of no use. </p>
+<p>Now I will add a new class to this file called “ContatctControllerTest.cs”. This class will have test method to handle the ContactController in my ASP.NET MVC project. </p>
+<p>Next is adding a reference to the project to be tested. So right click on the newly created test project and then select “Add Reference” and select the “Projects” tab.then select our MVC project and click OK button</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image11.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb11.png" width="458" height="167" /></a></p>
+<p>Now we have the reference available under the “Reference” section of the test project.</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image12.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb12.png" width="359" height="374" /></a></p>
+<p>&#160;</p>
+<p>Now we are going to use NUnit as our unit testing framework. So lets add the NUnit Dlls to our project. We are going to get his from the nuget repository using nuget package manager.</p>
+<p>&#160;</p>
+<p>Right click on your test project and select “Manage Nuget Packages” from the context&#160; menu.</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image13.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb13.png" width="419" height="196" /></a></p>
+<p>&#160;</p>
+<p>Search for nunit and install that.</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image14.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb14.png" width="401" height="272" /></a></p>
+<p>&#160;</p>
+<p>Then I added a reference to&#160; System.Web.MVC dll in my test projects because we will be using some classes in that assembly.</p>
+<p>&#160;</p>
+<p>Now we will set the path to nunuit dlls in coderush options window so that coderush can take care of the rest for us.</p>
+<p>Go to <strong>Tools-&gt;DevExpress-&gt;Options</strong> and Select UnitTesting and set the path to binaries</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image22.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb22.png" width="799" height="492" /></a></p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>Now we can create a class called “ContactControllerTest.cs” and put this code inside that</p>
+<p>&#160;</p>
+<p>using System.Collections.Generic;   <br />using NUnit.Framework;    <br />using OpenMVCRM.Controllers;    <br />using OpenMVCRM.Models;    <br />using System.Web.Mvc;</p>
+<p>namespace OpenMVCRM.Tests   <br />{    <br />&#160;&#160;&#160; [TestFixture]    <br />&#160;&#160;&#160; class ContatControllerTest    <br />&#160;&#160;&#160; {    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160; [Test]    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160; public void TestContactList()    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160; {    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ContactController c=new ContactController();    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; var result = c.Index() as ViewResult;    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Assert.AreEqual(&quot;Index&quot;, result.ViewName);    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160; }    <br />&#160;&#160;&#160;&#160;&#160;&#160; <br />&#160;&#160;&#160; }    <br />}</p>
+<p>&#160;</p>
+<p>Now right click on the test method and select “RunTests”</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image23.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb23.png" width="477" height="140" /></a></p>
+<p>&#160;</p>
+<p>and you can see the results in the output window</p>
+<p>&#160;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image24.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb24.png" width="553" height="260" /></a></p>
+<p>&#160;</p>
+<p>One Good think I like about code rush in this scenario is , once you run your tests, code rush will show the status of the test near to the method.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image18.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb18.png" width="447" height="163" /></a></p>
+<p>&#160;</p>
+<p>If you hover your mouse over, you will see a tool tip saying “Test has passed”. Its so awesome. </p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image19.png"><img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="assets/image_thumb19.png" width="437" height="175" /></a></p>

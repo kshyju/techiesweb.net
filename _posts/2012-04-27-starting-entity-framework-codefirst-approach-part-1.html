@@ -1,0 +1,83 @@
+---
+layout: post
+title: Starting Entity Framework Codefirst Approach Part- 1
+date: 2012-04-27 18:11:35.000000000 -04:00
+categories:
+- ASP.NET MVC
+- codefirst
+- EntityFramework
+tags:
+- ASP.NET MVC
+- Codefirst
+- Entity Framework CodeFirst
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _yoast_wpseo_linkdex: '62'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _yoast_wpseo_focuskw: 'Entity Framework Codefirst '
+  _yoast_wpseo_title: Starting Entity Framework Codefirst  Approach Part- 1 - TechiesWeb
+  _yoast_wpseo_metadesc: Creating an ASP.NET MVC3 project withEntity Framework Codefirst  is
+    so easy. Entity Framework Codefirst  will create your db tables from your Model
+    classes.
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Here is a small -quick-step -by-step  tutorial to get started with Entity Framework Codefirst  approach. I have included the sample project at the end of this post for reference.</p>
+<p>I created a new ASP.NET MVC3 Project using the New-&gt;Project Dialog.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-1.png"><img class="alignnone size-full wp-image-149" title="ef-codefirst-1" src="assets/ef-codefirst-1.png" alt="" width="313" height="238" /></a></p>
+<p>In Code First Approach, We create our Entities first by writing classes. Then Entity framework will create the database for us based on our classes. So Let us create some classes.</p>
+<p>Right click on the Models Folder and Select Add-&gt;New Item and Select Class. Give the class name as Customer.cs</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-2.png"><img class="alignnone size-full wp-image-150" title="ef-codefirst-2" src="assets/ef-codefirst-2.png" alt="" width="340" height="155" /></a></p>
+<p>Open the Customer.cs file and Add some properties for our Customer Entity.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-3-add-customer-class-properties.png"><img class="alignnone size-full wp-image-151" title="ef-codefirst-3-add-customer-class-properties" src="assets/ef-codefirst-3-add-customer-class-properties.png" alt="" width="489" height="181" /></a></p>
+<p>OK. Now Let us create a controller and View</p>
+<p>Right click on the Controllers folder in the Solution explorer and select Add-&gt;Controller. Give the Controller name as CustomerController. Keep the Scaffolding Template as Empty controller.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-4-add-controller.png"><img class="alignnone size-full wp-image-155" title="ef-codefirst-4-add-controller" src="assets/ef-codefirst-4-add-controller.png" alt="" width="512" height="320" /></a></p>
+<p>and we will add 3 action methods to this controller, The Index for Listing all customers and Create (both HTTPGET and HTTPPOST) for Creating new Entry.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-5-add-controller-actions.png"><img class="alignnone size-full wp-image-157" title="ef-codefirst-5-add-controller-actions" src="assets/ef-codefirst-5-add-controller-actions.png" alt="" width="444" height="366" /></a></p>
+<p>Now Let us write some Data Acces code. right click on the project and Create a folder called "DAL" to store our data access code. Create a new class called "SampleContext" .</p>
+<p>&nbsp;</p>
+<p>To make use of Entity framework, We need to have the entity framework dlls in our project. For adding that to our project, we can make use of Nuget package manager.</p>
+<p>Right Click on the References and select "Manage Nuget Packages". Select Entity Framework and click install. You may search in the search bar, if you don't find Entity framework by default.</p>
+<p>After the successful installation, you would see a green tick mark near to Entity framework.</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-6-add-controller-actions.png"><img class="alignnone size-full wp-image-158" title="ef-codefirst-6-add-controller-actions" src="assets/ef-codefirst-6-add-controller-actions.png" alt="" width="415" height="87" /></a></p>
+<p>Now if you expand the "References" section under your project, you can see EnrityFramework is added.</p>
+<p>Lets go back to our SampleContext.cs file and make it inherit from DbContext. DbContext resides in System.Data.Entity namespace. So you need to add a using statement to refer that in your class.</p>
+<p>Add a Property called "Customer" of type DbSet of our customer class</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-7.png"><img class="alignnone size-full wp-image-159" title="ef-codefirst-7" src="assets/ef-codefirst-7.png" alt="" width="665" height="112" /></a><br />
+Now Go back to our Customer Controller and Replace the code like this</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-8.png"><img class="alignnone size-full wp-image-161" title="ef-codefirst-8" src="assets/ef-codefirst-8.png" alt="" width="480" height="124" /></a></p>
+<p>You can see that we are creating an object of <strong>SampleContext</strong> class and calling the <strong>Customers</strong> Property and applying the <strong>ToList()</strong> functions to convert the result as a List. When calling the Customers Property, Entity framework will return all customers stored in the table (which will be created).</p>
+<p>I added some code in the Index view to iterate thru the Items and show it as an HTML table. You can find that in the sample project.</p>
+<p>Now Let us run the Application by pressing F5 key. Browse to the Customer Index action. You may see a blank page because we don't have any customer records present now.</p>
+<p>Go to <strong>SQLExpress</strong> instance and there you can see a new Database called <strong>EFCodeFirst.DAL.SampleContext.</strong></p>
+<p>&nbsp;</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-9.png"><img class="alignnone size-full wp-image-162" title="ef-codefirst-9" src="assets/ef-codefirst-9.png" alt="" width="415" height="243" /></a></p>
+<p>If you expand the tables you will see we have a table called Customers with all the columns same as our Customer classes properties.</p>
+<p>By Default, Entity framework will create a databse in the local SQL Express instance. But you can override this in different ways. You can see taht the database name is the full name of our DbContext class with the Namespaces.. If you want to create a database with a different name, you can override it  by calling the DBContext base class constructor like this</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-111.png"><img class="alignnone size-full wp-image-166" title="ef-codefirst-11" src="assets/ef-codefirst-111.png" alt="" width="415" height="133" /></a></p>
+<p>&nbsp;</p>
+<p>To Add a new customer record, We can update our Create Action methods code like this</p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/04/ef-codefirst-10.png"><img class="alignnone size-full wp-image-164" title="ef-codefirst-10" src="assets/ef-codefirst-10.png" alt="" width="501" height="278" /></a></p>
+<p>You can see that we are creating an object of our DbContext and adding a new Customer object to the Customers Property and Calling the SaveChanges method.  I am redirecting then back to the Index action to stick with the PRG (Post-Redirect-Get) pattern.</p>
+<p>Since this is a small tutorial, I have everything in one project . When you start developing applications, you may split it into different projects for your entities and Data access layer. I will be writing more posts following this for making the code better and handling complex scenarios like Joins and datatype length etc..</p>
+<p>You can download the source code of this example <a title="Download Sample project " href="http://techiesweb.net/wp-content/uploads/2012/04/EFCodeFirst.rar">here</a> for references.  Leave a comment if you download the source code from this page.</p>

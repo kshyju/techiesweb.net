@@ -1,0 +1,61 @@
+---
+layout: post
+title: Foreign Key relationship in Entity Framework Code First
+date: 2012-07-15 22:29:16.000000000 -04:00
+categories:
+- codefirst
+- EntityFramework
+tags:
+- Entity Framework CodeFirst
+- foreign key
+- one-to-many
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  Hide SexyBookmarks: '0'
+  Hide OgTags: '0'
+  _aioseop_keywords: entity framework codefirst, foreign key relationship, one-to-many
+    relationship
+  _aioseop_description: 'How does Entity framework CodeFirst supports Foreign Keys
+    and Relationships. '
+  _aioseop_title: Foreign Key relationship in Entity Framework Code First
+  _yoast_wpseo_linkdex: '76'
+  _yoast_wpseo_focuskw: Entity Framework Code First
+  _yoast_wpseo_title: ''
+  _yoast_wpseo_metadesc: Entity Framework Code First has nice support for Foreign
+    keys and relationship between tables
+  _yoast_wpseo_meta-robots-noindex: '0'
+  _yoast_wpseo_meta-robots-nofollow: '0'
+  _yoast_wpseo_meta-robots-adv: none
+  _yoast_wpseo_sitemap-include: "-"
+  _yoast_wpseo_sitemap-prio: "-"
+  _yoast_wpseo_canonical: ''
+  _yoast_wpseo_redirect: ''
+  _yoast_wpseo_opengraph-description: ''
+  _yoast_wpseo_google-plus-description: ''
+author:
+  login: admin
+  email: connectshyju@gmail.com
+  display_name: Shyju
+  first_name: Shyju
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>This is the third part of my Entity Framework Code First Tutorial for beginners. If you want to start fresh , Visit the <a href="http://techiesweb.net/starting-entity-framework-codefirst-approach-part-1/">first part here</a>.</p>
+<p>Entity Framework Code First has some nice conventions to follow when you want to work with relationships.  Let's see how it works.</p>
+<p>If your class contains a reference and a collection nvigation property, EF  will create a One-tp-Many relationshop. The navigation property need to be at only side(class) to get this one to many relation ship to be working.</p>
+<p>Let't take the customer class from our<a href="http://www.techiesweb.net/starting-entity-framework-codefirst-approach-part-2/"> part 2</a> source code. We will create a new model class for Address.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/addressclass.png"><img class="alignnone size-full wp-image-293" title="addressclass" src="assets/addressclass.png" alt="" width="406" height="183" /></a></p>
+<p>Now we  will add a Navigational property to our Customer class. Since one customer can have multiple Addresses, We can add a Collection property.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/customer-navigational-property.png"><img class="alignnone size-full wp-image-294" title="customer-navigational-property" src="assets/customer-navigational-property.png" alt="" width="434" height="492" /></a></p>
+<p>Now, Entity framework CodeFirst is going to create a new table for me to store the Addresses and it will have a Column to store the CustomerID. The convention for the name of the column is the "<strong><em>PrimaryKeyTableName_PrimaryKeyNameOfPrimaryKeyTable</em></strong>".</p>
+<p>The output is</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/Address-table.png"><img class="alignnone size-full wp-image-295" title="Address-table" src="assets/Address-table.png" alt="" width="314" height="275" /></a></p>
+<p>Now We can fill the collection property to save the Addresses while creating a new customer. Let's update the HttpPost Create action method like this.</p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/Save-address.png"><img class="alignnone size-full wp-image-296" title="Save-address" src="assets/Save-address.png" alt="" width="511" height="556" /></a></p>
+<p>We can also use Data Annotations also to define the Relationship, if you are not following the Convention (naming of the properties).I may explain it later in a different post.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
