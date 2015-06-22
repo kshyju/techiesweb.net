@@ -83,7 +83,7 @@ public class CustomerListViewModel
 &lt;/table&gt;
 &lt;/div&gt;</pre>
 <p>Now when we run the app, We will see all the customers in an HTML table.</p>
-<p><img class="alignnone" alt="" src="../assets/customers-in-html-table.png" width="309" height="449" /></p>
+<p><img class="alignnone" alt="" src="http://techiesweb.net/assets/customers-in-html-table.png" width="309" height="449" /></p>
 <p>&nbsp;</p>
 <h3>Implementing Paging</h3>
 <p>To add paging, the first thing to do is to add a new class to our project to represent the paging details. This class will have properties like BaseUrl,CurrentPage,HasNextPage etc...</p>
@@ -156,7 +156,7 @@ public class CustomerListViewModel
    @Html.Partial("TablePagingFooter", Model.PagingDetails, new ViewDataDictionary { {"baseurl",Url.Action("Index","Home")+"?c"}})
 &lt;/div&gt;</pre>
 <p>Now when your run the app, you can see that there is a new div just below our HTML table with the paging information. It shows how many total records we have, how many total pages and all navigable page numbers on the right side. (I have added some custom styling for the paging div)</p>
-<p><img class="alignnone" alt="" src="../assets/customer-list-with-paging.png" width="430" height="275" /></p>
+<p><img class="alignnone" alt="" src="http://techiesweb.net/assets/customer-list-with-paging.png" width="430" height="275" /></p>
 <p>&nbsp;</p>
 <h3><strong>Sorting and Filtering</strong></h3>
 <p>We are using the kTable plugin for sorting and filtering. kTable is a tiny jQuery plugin which will make some changes to our HTML table markup to include some sort-filter options to our table headers.</p>
@@ -198,7 +198,7 @@ public class CustomerListViewModel
 &lt;/script&gt;</pre>
 <p>&nbsp;</p>
 <p>Now when you run the app, You will see that there will be a filter icon on the table header for each column and clicking on this will bring a small popup where you can enter your search data.</p>
-<p><img class="alignnone" alt="" src="../assets/customer-list-with-filter-popup.png" width="470" height="198" /></p>
+<p><img class="alignnone" alt="" src="http://techiesweb.net/assets/customer-list-with-filter-popup.png" width="470" height="198" /></p>
 <p>&nbsp;</p>
 <p>User can enter a search text and click on filter button. But now it will simply show an alert message  because our code says so. We will update the callBackOnFilter and callBackOnClear events to send the filter criteria to our server to get the filtered data.</p>
 <p>We will add a new class to our Models folder called <code>ListFilterVM</code> with properties to handle the Sort &amp; Filter activities</p>
