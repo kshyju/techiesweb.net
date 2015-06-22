@@ -2,43 +2,6 @@
 layout: post
 title: ListBox and Dropdown list in asp.net mvc
 date: 2013-10-02 20:54:31.000000000 -04:00
-categories:
-- ASP.NET MVC
-tags:
-- Dropdown in asp.net mvc
-- DropdownListFor
-- ListBox in asp.net mvc
-status: publish
-type: post
-published: true
-meta:
-  _yoast_wpseo_linkdex: '74'
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _yoast_wpseo_focuskw: Dropdown list in asp.net mvc
-  _yoast_wpseo_title: ''
-  _yoast_wpseo_metadesc: Dropdown list and ListBox in ASP.NET MVC is possible with
-    the Html.DropdownListFor and Html.ListboxFor helper methods and viewmodels
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_sitemap-html-include: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-  _wpas_done_all: '1'
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>Everyday i see atleast a question on stackoverflow regarding an issue with correctly bringing a dropdown list to the view. Most of the questions and answers are using the "ViewBag way" to bring data from the action method to the razor view. Even though it works, It is not the best practice to handle the dropdown problem in ASP.NET MVC.  Pepole should switch to the viewmodel approach to transfer data between action methods and views. I think it is a good idea to put a good example here to show how to bring ListBox and Dropdown list in asp.net mvc so that those who are new to mvc can follow the neat way of doing it.</p>
 <p>Let's say our requirement is to build a page to add a User where we will enter the name of user and select the city from a list of available cities. So to show this list we need to render a dropdown / SELECT element to our view for the city selection part. So Let's start with a viewmodel.</p>
@@ -86,7 +49,7 @@ excerpt: !ruby/object:Hpricot::Doc
     &lt;input type="submit" /&gt;
 }</pre>
 <p>So here we are using the <code>Html.DropDownListFor</code> html helper to render the SELECT element.  When you run your page, you will get the out put like this where you have the Cities in the dropdown.</p>
-<p style="text-align: center;"><a href="http://www.techiesweb.net/wp-content/uploads/2013/10/ASP.NET_MVC_Dropdown_View.png"><img class="size-full wp-image-694 aligncenter" alt="ASP.NET_MVC_Dropdown_View" src="assets/ASP.NET_MVC_Dropdown_View.png" width="213" height="139" /></a></p>
+<p style="text-align: center;"><a href="../assets/ASP.NET_MVC_Dropdown_View.png"><img class="size-full wp-image-694 aligncenter" alt="ASP.NET_MVC_Dropdown_View" src="assets/ASP.NET_MVC_Dropdown_View.png" width="213" height="139" /></a></p>
 <p>If you look at the source of the HTML page, You can see that we have a form tag which has action method set to "Home/AddUser". So now let's write the HttpPost action method to handle the form submit.</p>
 <pre class="brush:csharp">[HttpPost]
 public ActionResult AddUser(AddUserVM model)

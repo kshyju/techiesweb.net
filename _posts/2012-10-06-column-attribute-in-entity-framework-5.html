@@ -2,47 +2,7 @@
 layout: post
 title: Column Attribute in Entity Framework 5
 date: 2012-10-06 11:14:29.000000000 -04:00
-categories:
-- codefirst
-- EntityFramework
-- Tips &amp; Tricks
-tags:
-- Column Attribute
-- Column Data Annotation
-- ColumnAttribute
-- Entity Framework 4.3.1
-- Entity Framework 5
-- Entity Framework CodeFirst
-status: publish
-type: post
-published: true
-meta:
-  _yoast_wpseo_linkdex: '77'
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _yoast_wpseo_focuskw: Column Attribute in Entity Framework 5
-  _yoast_wpseo_title: Column Attribute in Entity Framework 5 - TechiesWeb
-  _yoast_wpseo_metadesc: 'Column Attribute in Entity Framework 5 is moved to a different
-    namespace called System.ComponentModel.DataAnnotations.Schema. '
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
----
+
 <p>When developing applications using Entity Framework code first approach, you may use <code>Column </code>data annotation on your model properties to define what attributes that property has, ex : name, type etc.</p>
 <p>in Entity Framework 4.3.1,  ColumnAttribute is defined in <code>System.ComponentModel.DataAnnotations namespace</code> which is available in <code>EntityFramework.dll</code>. So you need to add a reference to EntityFramework.dll and include a <code>using</code> statement in your class to use that.</p>
 <pre class="brush:csharp">using System.ComponentModel.DataAnnotations;
@@ -78,5 +38,5 @@ namespace YourProject.Models
 <p><a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.schema.columnattribute.aspx">ColumnAttribute class</a></p>
 <p><a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.schema.aspx">System.ComponentModel.DataAnnotations.Schema Namespace</a></p>
 <p>If interested, you can see the source code by checking the class in any assembly decompiling tools.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/ColumnAttrinuteInEntityFramework5.png"><img class="alignnone size-full wp-image-485" title="ColumnAttrinuteInEntityFramework5" src="assets/ColumnAttrinuteInEntityFramework5.png" alt="ColumnAttribute in EntityFramework 5" width="521" height="355" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/ColumnAttrinuteInEntityFramework5.png"><img class="alignnone size-full wp-image-485" title="ColumnAttrinuteInEntityFramework5" src="../assets/ColumnAttrinuteInEntityFramework5.png" alt="ColumnAttribute in EntityFramework 5" width="521" height="355" /></a></p>
 <p>&nbsp;</p>

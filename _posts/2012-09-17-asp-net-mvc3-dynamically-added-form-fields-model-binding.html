@@ -2,46 +2,6 @@
 layout: post
 title: ASP.NET MVC3 Dynamically added form fields model binding
 date: 2012-09-17 19:57:49.000000000 -04:00
-categories:
-- ASP.NET MVC
-tags:
-- ASP.NET MVC
-- asp.net mvc3
-- asp.net mvc3 dynamic field model binding
-- asp.net mvc3 dynamic form
-- asp.net mvc3 model binding
-- inline editing
-- mvc3 dynamic forms
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _yoast_wpseo_linkdex: '79'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _yoast_wpseo_focuskw: MVC3 dynamically added form fields model binding
-  _yoast_wpseo_title: ASP.NET MVC3 Dynamically added form fields model binding
-  _yoast_wpseo_metadesc: This post explains how ASP.NET MVC3 Dynamically added form
-    fields model binding works when you add form elements and submit it to your HttpPost
-    action .
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>Adding  new Item to a list of items, inline is a very nice feature you can provide to your user. This posts shows 2 different ways to do this in ASP.NET MVC3 and how Modelbinding handles that.</p>
 <h2>MVC3 dynamically added form fields model binding</h2>
@@ -69,7 +29,7 @@ public class UserInterest
 }</pre>
 <p>This action is simply creating an object and setting the Name property and Setting the Interests collection. <code>GetUserInterests</code> is a method which returns a list of <code>UserInterest</code> object.</p>
 <p>Now to handle the collection Property of our Model, Let's create an <strong>Editor template</strong> called  <code>UserInterest.cshtml</code> under <code>Home\EditorTempaltes</code>.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template.png"><img class="size-full wp-image-360" title="editor-template" src="assets/editor-template.png" alt="Editor Template" width="292" height="83" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template.png"><img class="size-full wp-image-360" title="editor-template" src="../assets/editor-template.png" alt="Editor Template" width="292" height="83" /></a></p>
 <p>Now we will use <code>Html.EditorFor</code> HTML Helper method to bring this editor template to our main view.</p>
 <pre class="brush:csharp">@model MvcApplication2.Models.User
 @using(Html.BeginForm())
@@ -103,9 +63,9 @@ public class UserInterest
         });
     });</pre>
 <p>So the result of running our updated project will be like this. there is a "<em><strong>Add New Item</strong></em>" button and clicking that will add new record to our existing table.<br />
-<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/newItem-added1.png"><img class="alignnone size-full wp-image-380" title="newItem-added" src="assets/newItem-added1.png" alt="" width="327" height="180" /></a></p>
+<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/newItem-added1.png"><img class="alignnone size-full wp-image-380" title="newItem-added" src="../assets/newItem-added1.png" alt="" width="327" height="180" /></a></p>
 <p>Now When the user posts the form, the MVC Model binding feature will bind the newly added items as well. You can check that by putting a breakpoint in the HttpPost action method.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/httpposted.png"><img class="alignnone size-full wp-image-373" title="httpposted" src="assets/httpposted.png" alt="" width="692" height="220" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/httpposted.png"><img class="alignnone size-full wp-image-373" title="httpposted" src="../assets/httpposted.png" alt="" width="692" height="220" /></a></p>
 <p>&nbsp;</p>
 <p>The trick is to keep the <strong>id</strong> property value of the html element in this format.</p>
 <p><code>CollectionName_<em>ItemIndex</em>__PropertyName</code></p>

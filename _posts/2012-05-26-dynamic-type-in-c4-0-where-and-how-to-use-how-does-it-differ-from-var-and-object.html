@@ -3,53 +3,10 @@ layout: post
 title: dynamic type in C#.4.0  Where and how to use ? How does it differ from var
   and object ?
 date: 2012-05-26 15:50:05.000000000 -04:00
-categories:
-- C# 4.0
-tags:
-- C#
-- C# 4.0
-- dynamic
-- dynamic type
-- weekly typing
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _aioseop_description: dynamic type in C# is a special type where we can set any
-    kind of values. Compiler will not worry about the type we are setting in the dynamic
-    type property.
-  _aioseop_keywords: dynamic, weekly typed, C# 4.0 dynamic,
-  _wp_old_slug: dynamic-type-in-c-4-where-and-how-to-use-how-does-it-differ-from-var-and-object
-  _aioseop_title: dynamic type in C# 4.0. How does it differ from var and object
-  _yoast_wpseo_linkdex: '60'
-  _yoast_wpseo_focuskw: dynamic type
-  _yoast_wpseo_title: dynamic type in C#.4.0  Where and how to use ? How does it differ
-    from var and object ? - TechiesWeb
-  _yoast_wpseo_metadesc: dynamic type in C# allows us to define a variable where the
-    type will be know at runtime.
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
+
 ---
 <p>Recently i was working on an API project where i have to return JSON data to the client for different kind of Requests like Customers, Orders, Products etc.  Since i was working on ASP.NET MVC, I could make use of the Json method to convert my entities ( Customer / Product etc...) to Json format in one line of code.No matter however my entity looks like, how complex it is, Json method will serialize that to the JSON format.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/returnJSON.png"><img class="alignnone size-full wp-image-204" title="returnJSON" src="assets/returnJSON.png" alt="" width="563" height="100" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/returnJSON.png"><img class="alignnone size-full wp-image-204" title="returnJSON" src="../assets/returnJSON.png" alt="" width="563" height="100" /></a></p>
 <p>I want to return a generic response to my API call which tells me whether the call is success or failure, if failure what is the reason for failure ( ex : Invalid input / Not autherized to make this call etc..). So one way to this is doing like this. Create a class for returning the customer Data ( Ex : List of customers) with the properties for The status, error message and finally the reponse data ( the list of customers) .</p>
 <p>&nbsp;</p>
 <p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/customerResponseAPI.png"><img class="alignnone size-full wp-image-206" title="customerResponseAPI" src="assets/customerResponseAPI.png" alt="" width="511" height="261" /></a></p>
@@ -59,32 +16,32 @@ excerpt: !ruby/object:Hpricot::Doc
 <p><strong>So what's next ?</strong></p>
 <p>Here comes the dynamic type. we can use dynamic type in places where we can not tell the compiler in advance that this is going to be my type. Ex : In the above method, We told the Compiler that the CustomersData property is of type IEnumerable&lt;Customer&gt; . Compiler accepted that and If we are setting the value of this property as same type, the program will compile also. But if we use the dynamic type instead of the static IEnumerable&lt;Customer&gt;, Compiler is going to ignore that. you can set any type in that. When the program get executed , That property value will be replaced with what we are setting.</p>
 <p>So Let's replace our code a little bit. We will write a generic class which can be used for returning all kind of requests</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/APIResponse.png"><img class="alignnone size-full wp-image-208" title="APIResponse" src="assets/APIResponse.png" alt="" width="413" height="147" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/APIResponse.png"><img class="alignnone size-full wp-image-208" title="APIResponse" src="../assets/APIResponse.png" alt="" width="413" height="147" /></a></p>
 <p>You might have noticed that the type of Data Property here is dynamic. That means , It can take anything and the compiler wont care about it.</p>
 <p>So now we can use this for all our methods.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/new-way.png"><img class="alignnone size-full wp-image-209" title="new-way" src="assets/new-way.png" alt="" width="499" height="313" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/new-way.png"><img class="alignnone size-full wp-image-209" title="new-way" src="../assets/new-way.png" alt="" width="499" height="313" /></a></p>
 <p><strong>GetMockProductData</strong> returns a list of Products and <strong>GetMockCustomerData</strong> returns a list of Customers. Our Data Property is ok to accept any type now. There is no problem.</p>
 <p>&nbsp;</p>
 <blockquote><p><strong>Methods/Properties of a dynamic type will be evaluated at runtime only. Not at compile time. The compiler will assume that the object in a variable supports any operations.</strong></p></blockquote>
 <p>&nbsp;</p>
 <p><strong>Doesn't it looks like var ?</strong></p>
 <p><strong>var</strong> and <strong>dynamic</strong> are  differnet. var is still strongly typed. So the moment you initialize the var type, It becomes that type.  That means, if you write something like this</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var.png"><img class="alignnone size-full wp-image-210" title="var" src="assets/var.png" alt="" width="419" height="68" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var.png"><img class="alignnone size-full wp-image-210" title="var" src="../assets/var.png" alt="" width="419" height="68" /></a></p>
 <p>iamStrongType becomes a string type. So it is strongly typed. You can not assign a different type to this variable now like.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/compile-error.png"><img class="alignnone size-full wp-image-211" title="compile-error" src="assets/compile-error.png" alt="" width="710" height="90" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/compile-error.png"><img class="alignnone size-full wp-image-211" title="compile-error" src="../assets/compile-error.png" alt="" width="710" height="90" /></a></p>
 <p>Another thing is, you can not define var as a property type.</p>
 <p><strong>So where to use var ?</strong></p>
 <p>i think the most i use var is as a shorthand for creating new objects. Instead of writing this</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var-use.png"><img class="alignnone size-full wp-image-212" title="var-use" src="assets/var-use.png" alt="" width="712" height="46" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var-use.png"><img class="alignnone size-full wp-image-212" title="var-use" src="../assets/var-use.png" alt="" width="712" height="46" /></a></p>
 <p>I can simply write this.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var-2.png"><img class="alignnone size-full wp-image-213" title="var-2" src="assets/var-2.png" alt="" width="458" height="36" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/var-2.png"><img class="alignnone size-full wp-image-213" title="var-2" src="../assets/var-2.png" alt="" width="458" height="36" /></a></p>
 <p>That is much cleaner.</p>
 <p>Another scenario where you use var is to create a type on the fly. You want to return something, but you don't want to write a class for that. So you can use var there  like this.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/returnJSON.png"><img class="alignnone size-full wp-image-204" title="returnJSON" src="assets/returnJSON.png" alt="" width="563" height="100" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/returnJSON.png"><img class="alignnone size-full wp-image-204" title="returnJSON" src="../assets/returnJSON.png" alt="" width="563" height="100" /></a></p>
 <p><strong>Object Vs Dynamic </strong></p>
 <p>Object is the base class . So why not use that instead of dynamic ?</p>
 <p>Yes you can use that. But  you need to do an explicit type casting eveytime you want to get the value back and forth.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/with-object.png"><img class="alignnone size-full wp-image-222" title="with-object" src="assets/with-object.png" alt="" width="413" height="177" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/05/with-object.png"><img class="alignnone size-full wp-image-222" title="with-object" src="../assets/with-object.png" alt="" width="413" height="177" /></a></p>
 <p>I hope this gives you some idea about dynamic type in C#4.0. You can download the sample source code which i used in the post <a href="http://www.techiesweb.net/wp-content/uploads/2012/05/DynamicISAwesome.rar">here</a>. Don't forget to leave me a comment, if this post helps you.</p>
 <p>&nbsp;</p>
 <p><a style="display: none;" href="http://www.codeproject.com/script/Articles/BlogFeedList.aspx?amid=3778971" rel="tag">CodeProject</a></p>

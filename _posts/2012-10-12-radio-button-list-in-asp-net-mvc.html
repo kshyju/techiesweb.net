@@ -2,43 +2,6 @@
 layout: post
 title: Radio button list in ASP.NET MVC
 date: 2012-10-12 02:54:21.000000000 -04:00
-categories:
-- ASP.NET MVC
-tags:
-- Editor Template
-- Form posting
-- Html.EditorFor
-- Radio button list
-status: publish
-type: post
-published: true
-meta:
-  _yoast_wpseo_linkdex: '81'
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _yoast_wpseo_focuskw: Radio button list in ASP.NET MVC
-  _yoast_wpseo_title: Radio button list in ASP.NET MVC - TechiesWeb
-  _yoast_wpseo_metadesc: Strongly typed Radio button list in ASP.NET MVC can be easily
-    done with the help of ASP.NET MVC Model binding and using Html.EditorFor helper
-    method.
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>When developing web applications , you may need to show radio button list in ASP.NET MVC  so that users can make a selection from the options(radio buttons) and submit the form.  We can do this easily with the help of MVC Model binding.</p>
 <p>Let's create a quiz page where we are going to show some questions with it's answers to the user and user can select an answer from the available answer options, represented by radio buttons.</p>
@@ -92,9 +55,9 @@ public class Evaluation
     return View(evalVM);           
 }</pre>
 <p>Now our next step is to create the views to render the UI.  We are going to create an editor template to render the questions and it's answers. So Let's go to the <code>Views</code> folder and create a folder called <strong>EditorTemplates</strong> under the current controller folder (if you added the GET action method to <code>Home</code> controller, this will be <code>~/Views/Home</code>)</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/mvc-editor-template-folder.png"><img class="alignnone size-full wp-image-520" title="mvc-editor-template-folder" alt="Editor template" src="assets/mvc-editor-template-folder.png" width="320" height="180" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/mvc-editor-template-folder.png"><img class="alignnone size-full wp-image-520" title="mvc-editor-template-folder" alt="Editor template" src="../assets/mvc-editor-template-folder.png" width="320" height="180" /></a></p>
 <p>After creating the folder, Add a new Editor template to that. Right click on the folder and select <strong>Add View</strong> option and give the name same as the type name (in this case<code> Question</code>).</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/editor-template.png"><img class="alignnone size-full wp-image-521" title="editor-template" alt="" src="assets/editor-template.png" width="321" height="128" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/editor-template.png"><img class="alignnone size-full wp-image-521" title="editor-template" alt="" src="../assets/editor-template.png" width="321" height="128" /></a></p>
 <p>Now add the below code to the newly created editor template (Question.cshtml)</p>
 <pre class="brush:csharp">@model ViewModels.Question
 &lt;div&gt;
@@ -117,7 +80,7 @@ public class Evaluation
     &lt;input type="submit" /&gt;
 }</pre>
 <p>now run the app (hit F5) and you will see the screen with the questions and answers. each answer will be accompanied by a radio button so that user can select one.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/asp.net-mvc-RadioButton-output.png"><img class="alignnone size-full wp-image-526" title="asp.net-mvc-RadioButton-output" alt="asp.net mvc radio button list values on form post" src="assets/asp.net-mvc-RadioButton-output.png" width="448" height="328" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/10/asp.net-mvc-RadioButton-output.png"><img class="alignnone size-full wp-image-526" title="asp.net-mvc-RadioButton-output" alt="asp.net mvc radio button list values on form post" src="../assets/asp.net-mvc-RadioButton-output.png" width="448" height="328" /></a></p>
 <h3>Getting the selected radio button values on form post</h3>
 <p>To get the selected radio button values on form submit, we can check the properties of the posted model. MVC Model binding can bind the posted form data to an instance of our ViewModel. So let's add the below code to handle the POST action method.</p>
 <pre class="brush:csharp">[HttpPost]

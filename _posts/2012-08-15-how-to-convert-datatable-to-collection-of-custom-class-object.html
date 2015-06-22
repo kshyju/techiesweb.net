@@ -2,49 +2,6 @@
 layout: post
 title: How to Convert DataTable to Collection of Custom Class object
 date: 2012-08-15 18:20:10.000000000 -04:00
-categories:
-- C# 4.0
-- LINQ
-- Tips &amp; Tricks
-tags:
-- AsEnumerable
-- C#
-- C# 4.0
-- DataTable
-- LINQ
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _aioseop_description: How to Convert DataTable to Collection of Custom Class object
-    using LINQ. The normal approach is a for each loop. But we can do the same thing
-    with LINQ
-  _aioseop_title: Converting DataTable to Collection of Custom Class object
-  _yoast_wpseo_linkdex: '80'
-  _yoast_wpseo_focuskw: DataTable
-  _yoast_wpseo_title: 'How to Convert DataTable to Collection of Custom Class object '
-  _yoast_wpseo_metadesc: Convert DataTable to a Collection of custom class objects
-    so that we can apply LINQ on that.
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>Imagine you have a <code>DataTable</code> with Records and you want to Convert that to a List of your Custom class objects ? how do you do that ?</p>
 <p>The normal -straight forward way is to Loop through  each <code>DataRow</code>, Create a new instance of Custom class object, read the column values of the current row(iterator) in the loop and Set the Proerties of the object..</p>

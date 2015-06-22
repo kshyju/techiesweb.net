@@ -2,47 +2,9 @@
 layout: post
 title: Avoid pluralized name in table creation with Entity Framework Code First
 date: 2012-03-31 15:45:39.000000000 -04:00
-categories:
-- EntityFramework
-tags:
-- Avoid pluralized name
-- Codefirst
-- Entity Framework
-- Entity Framework CodeFirst
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _yoast_wpseo_linkdex: '26'
-  Hide OgTags: '0'
-  Hide SexyBookmarks: '0'
-  _yoast_wpseo_focuskw: Avoid pluralized name
-  _yoast_wpseo_title: 'Avoid pluralized name in table creation with Entity Framework
-    CodeFirst '
-  _yoast_wpseo_metadesc: Avoid pluralized name in table creation when using Entity
-    Framework CodeFirst is possible by overriding the onmodelcreation method in your
-    dbcontext class,
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>When you work with Entity Framework Code First approach, you are creating your database tables  from your model classes.  Usually Entity Framework will create tables with Pluralized names. that means if you have a model class called <strong>PhoneNumber</strong>, Entity framework will create a table for this class called "<strong>PhoneNumbers</strong>". If you wish to avoid pluralized name and wants singular name like Customer , you can do it like this</p>
 <p>In your DBContext class,  Override the "OnModelCreating" method like this</p>
-<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/Entity-Framework-AvoidPluralNames.png"><img class="alignnone  wp-image-131" title="Entity-Framework-AvoidPluralNames" src="assets/Entity-Framework-AvoidPluralNames.png" alt="" width="536" height="149" /></a></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/Entity-Framework-AvoidPluralNames.png"><img class="alignnone  wp-image-131" title="Entity-Framework-AvoidPluralNames" src="../assets/Entity-Framework-AvoidPluralNames.png" alt="" width="536" height="149" /></a></p>
 <p>&nbsp;</p>
 <p>Having this Method Overriding will avoid creating tables with pluralized names. Now it will create a Table called "<strong>PhoneNumber</strong>" ,<strong> Not "PhoneNumbers"</strong></p>

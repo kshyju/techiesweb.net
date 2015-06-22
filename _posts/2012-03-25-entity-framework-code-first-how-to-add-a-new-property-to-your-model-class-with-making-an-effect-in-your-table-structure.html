@@ -3,31 +3,13 @@ layout: post
 title: Entity Framework Code First– How to add a new Property to your model class
   with making an effect in your table structure
 date: 2012-03-25 03:41:58.000000000 -04:00
-categories:
-- ASP.NET MVC
-- EntityFramework
-tags:
-- Entity Framework CodeFirst
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  _yoast_wpseo_linkdex: '0'
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
+
 ---
 <p>IF you are using Entity framework code first approach, there is a good chance that you will be adding new properties to your modal classes as your development goes further. As we know the “code-first” approach,  creates the database schema from your code ( your classes which represent your entities).  When you add a new property to your class, your tables are not in sync with your classes. because your schema is not updated. So running the project will give you an error like this</p>
 <p>The Yellow screen of death while accessing the page in browser.</p>
-<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/efcodefiresterror1.png"><img class="alignnone  wp-image-107" title="efcodefiresterror" src="assets/efcodefiresterror1.png" alt="" width="519" height="233" /></a></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/efcodefiresterror1.png"><img class="alignnone  wp-image-107" title="efcodefiresterror" src="../assets/efcodefiresterror1.png" alt="" width="519" height="233" /></a></p>
 <p>or while debugging in the IDE</p>
-<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image25.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" title="image" src="assets/image_thumb25.png" alt="image" width="535" height="363" border="0" /></a></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/image25.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" title="image" src="../assets/image_thumb25.png" alt="image" width="535" height="363" border="0" /></a></p>
 <p>What should we need to do to fix this problem ? Lets go back to our example and show what made Visual studio throw me this error.</p>
 <p>&nbsp;</p>
 <p>This was my model class</p>

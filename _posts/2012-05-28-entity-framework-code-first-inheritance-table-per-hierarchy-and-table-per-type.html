@@ -2,60 +2,7 @@
 layout: post
 title: 'Entity Framework Code First Inheritance : Table Per Type and Table Per Hierarchy'
 date: 2012-05-28 06:24:03.000000000 -04:00
-categories:
-- codefirst
-- CodeProject
-- EntityFramework
-tags:
-- abstract base class inheritance
-- Codefirst
-- Entity Framework
-- Entity Framework CodeFirst
-- Inheritance
-- Table Per Hierarchy
-- Table Per Type
-- TPH
-- TPT
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _aioseop_title: 'Entity Framework Code First Inheritance : Table Per Hierarchy and
-    Table Per Type'
-  _aioseop_description: How entity Framework handles Inheritance.  Table Per Hierarchy
-    and Table Per Type are the two methods to handle inheritance. By default, Entity
-    framework code first uses Table Per Hierarchy method to handle inheritance when
-    creating tables from entities.  in TPH, All Data in the hierarchy will be saved
-    in a single database table and it uses a Discriminator column to indentify which
-    record belongs to which sub type.  The value of this column will be the name of
-    the subtype.
-  _aioseop_keywords: Table Per Hierarchy, TPH, TPT, Table Per Type, Entity Framework  Code
-    First, Abstract base class
-  _yoast_wpseo_linkdex: '55'
-  _yoast_wpseo_focuskw: Table Per Type
-  _yoast_wpseo_title: ''
-  _yoast_wpseo_metadesc: 'Entity Framework code first  creates database tables from
-    Model classes in two ways, Table Per Type and Table Per Hierarchy '
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
+
 ---
 <p>Recently i <a href="http://stackoverflow.com/a/10420303/40521">answered </a>a question in <a href="http://stackoverflow.com/questions/10420075/querying-by-base-type-in-ef4-code-first/10420303#10420303">stackoverflow </a>about how to create separate tables for each sub type when handling inheritance. Today i thought of expanding it with some sample source code and share it here.</p>
 <p>While working with data driven applications, Some times we need to implement Inheritance in our code as well as the data storage. Let's take a look at how Entity Framework CodeFirst handles this</p>

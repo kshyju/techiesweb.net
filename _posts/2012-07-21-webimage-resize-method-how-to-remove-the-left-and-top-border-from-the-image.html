@@ -2,68 +2,19 @@
 layout: post
 title: WebImage.Resize method - How to  Remove the Left and Top border from the image
 date: 2012-07-21 18:44:12.000000000 -04:00
-categories:
-- ASP.NET
-- ASP.NET MVC
-- C# 4.0
-- Tips &amp; Tricks
-tags:
-- Image border problem
-- Image Resizing
-- System.Web.Helpers
-- WebImage Class
-- WebImage.Crop
-- WebImage.Resize
-status: publish
-type: post
-published: true
-meta:
-  _edit_last: '1'
-  Hide SexyBookmarks: '0'
-  Hide OgTags: '0'
-  _aioseop_title: How to remove the left and top border from the image produced by
-    WebImage.Resize method
-  _aioseop_description: By default, The WebImage.Resize method generates an default
-    LEFT and TOP image of 1px size. We can remove this border by calling the Crop
-    method
-  _aioseop_keywords: WebImage class, WebImage.Resize, WebImage.Resize border problem,
-    Image border problem
-  _yoast_wpseo_linkdex: '75'
-  _yoast_wpseo_focuskw: webimage.resize
-  _yoast_wpseo_title: WebImage.Resize method - How to  Remove the Left and Top border
-    from the image - TechiesWeb
-  _yoast_wpseo_metadesc: Remove the additional border came as a result when you use
-    WebImage.Resize method by cropping the image by 1px left and 1px top with the
-    Resize method
-  _yoast_wpseo_meta-robots-noindex: '0'
-  _yoast_wpseo_meta-robots-nofollow: '0'
-  _yoast_wpseo_meta-robots-adv: none
-  _yoast_wpseo_sitemap-include: "-"
-  _yoast_wpseo_sitemap-prio: "-"
-  _yoast_wpseo_canonical: ''
-  _yoast_wpseo_redirect: ''
-  _yoast_wpseo_opengraph-description: ''
-  _yoast_wpseo_google-plus-description: ''
-author:
-  login: admin
-  email: connectshyju@gmail.com
-  display_name: Shyju
-  first_name: Shyju
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
+
 ---
 <p><code>WebImage</code> is a class in <code>System.Web.Helpers</code>  namespace ( in System.Web.Helpers dll) which helps us to do some useful things with an image in a webpage like cropping, resizing,flipping ( vertical &amp; horizontal), rotating etc... It is a very useful class if you are working with some code which returns an image  according to your needs ( image of 100 px height and 100 px width / left rotated image etc...). Recently i was using this class for an ASP.NET MVC project where i had an image controller and a GET action method which returns an image with the following code.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/WebImage.png"><img class="alignnone size-full wp-image-305" title="WebImage" src="assets/WebImage.png" alt="" width="409" height="120" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/WebImage.png"><img class="alignnone size-full wp-image-305" title="WebImage" src="../assets/WebImage.png" alt="" width="409" height="120" /></a></p>
 <p><code>GetImagePathFromId</code> is my custom function which accepts an id of the image and returns a full path to the image. <strong>width</strong> and <strong>height</strong> are two parameters i am passing to the <code>Resize</code> method to get my image resized. And i will get the out put like this.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/with-border.png"><img class="alignnone size-full wp-image-306" title="with-border" src="assets/with-border.png" alt="" width="383" height="257" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/with-border.png"><img class="alignnone size-full wp-image-306" title="with-border" src="../assets/with-border.png" alt="" width="383" height="257" /></a></p>
 <p>Nice ! Everything looks fine .</p>
 <p><strong>Wait......!!!!!</strong></p>
 <p>Did you notice there is small border on the left and top side of the image ? Ah ! I don't really want that . What to do now ?</p>
 <p>By default, The <code>Resize</code> method adds a left and top border of 1px to the resulting image. If you do not want that, you can simply get rid of it by calling the <code>Crop</code> method and pass 1px left and 1px top.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/crop.png"><img class="alignnone size-full wp-image-307" title="crop" src="assets/crop.png" alt="" width="446" height="128" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/crop.png"><img class="alignnone size-full wp-image-307" title="crop" src="../assets/crop.png" alt="" width="446" height="128" /></a></p>
 <p>The <strong>Crop</strong> method will crop that many pixels from the image. In this case, 1px from top and 1px from left. This will give us an image without any LEFT-TOP borders like this.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/cropped-without-border.png"><img class="alignnone size-full wp-image-308" title="cropped-without-border" src="assets/cropped-without-border.png" alt="" width="357" height="240" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/07/cropped-without-border.png"><img class="alignnone size-full wp-image-308" title="cropped-without-border" src="../assets/cropped-without-border.png" alt="" width="357" height="240" /></a></p>
 <p>Some useful resources</p>
 <p><a href="http://msdn.microsoft.com/en-us/library/system.web.helpers.webimage(v=vs.99).aspx">http://msdn.microsoft.com/en-us/library/system.web.helpers.webimage(v=vs.99).aspx</a></p>
 <p><a href="http://msdn.microsoft.com/en-us/library/system.web.helpers.webimage.resize(v=vs.99).aspx">http://msdn.microsoft.com/en-us/library/system.web.helpers.webimage.resize(v=vs.99).aspx</a></p>
