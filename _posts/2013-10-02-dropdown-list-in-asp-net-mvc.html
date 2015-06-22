@@ -49,7 +49,7 @@ date: 2013-10-02 20:54:31.000000000 -04:00
     &lt;input type="submit" /&gt;
 }</pre>
 <p>So here we are using the <code>Html.DropDownListFor</code> html helper to render the SELECT element.  When you run your page, you will get the out put like this where you have the Cities in the dropdown.</p>
-<p style="text-align: center;"><a href="../assets/ASP.NET_MVC_Dropdown_View.png"><img class="size-full wp-image-694 aligncenter" alt="ASP.NET_MVC_Dropdown_View" src="assets/ASP.NET_MVC_Dropdown_View.png" width="213" height="139" /></a></p>
+<p style="text-align: center;"><a href="http://techiesweb.net/assets/ASP.NET_MVC_Dropdown_View.png"><img class="size-full wp-image-694 aligncenter" alt="ASP.NET_MVC_Dropdown_View" src="assets/ASP.NET_MVC_Dropdown_View.png" width="213" height="139" /></a></p>
 <p>If you look at the source of the HTML page, You can see that we have a form tag which has action method set to "Home/AddUser". So now let's write the HttpPost action method to handle the form submit.</p>
 <pre class="brush:csharp">[HttpPost]
 public ActionResult AddUser(AddUserVM model)

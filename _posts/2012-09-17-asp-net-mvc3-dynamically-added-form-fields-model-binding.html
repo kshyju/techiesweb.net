@@ -29,7 +29,7 @@ public class UserInterest
 }</pre>
 <p>This action is simply creating an object and setting the Name property and Setting the Interests collection. <code>GetUserInterests</code> is a method which returns a list of <code>UserInterest</code> object.</p>
 <p>Now to handle the collection Property of our Model, Let's create an <strong>Editor template</strong> called  <code>UserInterest.cshtml</code> under <code>Home\EditorTempaltes</code>.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template.png"><img class="size-full wp-image-360" title="editor-template" src="../assets/editor-template.png" alt="Editor Template" width="292" height="83" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/editor-template.png"><img class="size-full wp-image-360" title="editor-template" src="http://techiesweb.net/assets/editor-template.png" alt="Editor Template" width="292" height="83" /></a></p>
 <p>Now we will use <code>Html.EditorFor</code> HTML Helper method to bring this editor template to our main view.</p>
 <pre class="brush:csharp">@model MvcApplication2.Models.User
 @using(Html.BeginForm())
@@ -63,9 +63,9 @@ public class UserInterest
         });
     });</pre>
 <p>So the result of running our updated project will be like this. there is a "<em><strong>Add New Item</strong></em>" button and clicking that will add new record to our existing table.<br />
-<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/newItem-added1.png"><img class="alignnone size-full wp-image-380" title="newItem-added" src="../assets/newItem-added1.png" alt="" width="327" height="180" /></a></p>
+<a href="http://www.techiesweb.net/wp-content/uploads/2012/09/newItem-added1.png"><img class="alignnone size-full wp-image-380" title="newItem-added" src="http://techiesweb.net/assets/newItem-added1.png" alt="" width="327" height="180" /></a></p>
 <p>Now When the user posts the form, the MVC Model binding feature will bind the newly added items as well. You can check that by putting a breakpoint in the HttpPost action method.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/httpposted.png"><img class="alignnone size-full wp-image-373" title="httpposted" src="../assets/httpposted.png" alt="" width="692" height="220" /></a></p>
+<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/09/httpposted.png"><img class="alignnone size-full wp-image-373" title="httpposted" src="http://techiesweb.net/assets/httpposted.png" alt="" width="692" height="220" /></a></p>
 <p>&nbsp;</p>
 <p>The trick is to keep the <strong>id</strong> property value of the html element in this format.</p>
 <p><code>CollectionName_<em>ItemIndex</em>__PropertyName</code></p>

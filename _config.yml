@@ -1,10 +1,8 @@
 # Site settings
 title: TechiesWeb.NET
-email: your-email@domain.com
+email: 
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Tips and Tricks for ASP.NET MVC,ASP.NET Web Api, Angular JS and all other cool stuff
 baseurl: "" # the subpath of your site, e.g. /blog/
 
 

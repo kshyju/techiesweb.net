@@ -4,8 +4,7 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Shyju Krishnankutty is a curious developer who is passionate about technology and software development.
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+<p>My cv on stackoverflow : <a href="http://careers.stackoverflow.com/kshyju">http://careers.stackoverflow.com/kshyju</a></p>
+<p>You may follow my tweets <a href="https://twitter.com/kshyju" target="_blank">@kshyju</a></p>

@@ -5,6 +5,6 @@ date: 2012-03-31 15:45:39.000000000 -04:00
 ---
 <p>When you work with Entity Framework Code First approach, you are creating your database tables  from your model classes.  Usually Entity Framework will create tables with Pluralized names. that means if you have a model class called <strong>PhoneNumber</strong>, Entity framework will create a table for this class called "<strong>PhoneNumbers</strong>". If you wish to avoid pluralized name and wants singular name like Customer , you can do it like this</p>
 <p>In your DBContext class,  Override the "OnModelCreating" method like this</p>
-<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/Entity-Framework-AvoidPluralNames.png"><img class="alignnone  wp-image-131" title="Entity-Framework-AvoidPluralNames" src="../assets/Entity-Framework-AvoidPluralNames.png" alt="" width="536" height="149" /></a></p>
+<p><a href="http://techiesweb.net/wp-content/uploads/2012/03/Entity-Framework-AvoidPluralNames.png"><img class="alignnone  wp-image-131" title="Entity-Framework-AvoidPluralNames" src="http://techiesweb.net/assets/Entity-Framework-AvoidPluralNames.png" alt="" width="536" height="149" /></a></p>
 <p>&nbsp;</p>
 <p>Having this Method Overriding will avoid creating tables with pluralized names. Now it will create a Table called "<strong>PhoneNumber</strong>" ,<strong> Not "PhoneNumbers"</strong></p>
