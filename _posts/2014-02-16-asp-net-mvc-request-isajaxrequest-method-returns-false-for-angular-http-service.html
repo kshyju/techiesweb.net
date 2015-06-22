@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Why ASP.NET MVC Request.IsAjaxRequest method returns false for $http calls
+  from angular
+date: 2014-02-16 00:11:29.000000000 -05:00
+---
 <p>Lately i was trying to bring in some angular.js magic to one of the asp.net mvc project i was working on and ran into a strange situation.</p>
 <p>I had my asp.net mvc action method returns the razor view if it is a normal request and JSON data if it is an ajax request. so my code goes like this.</p>
 <pre class="brush:csharp">if (Request.IsAjaxRequest())
