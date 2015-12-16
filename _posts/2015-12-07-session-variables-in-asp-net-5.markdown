@@ -65,3 +65,6 @@ To set session,
 To get session,
 
      var val = HttpContext.Session.GetInt32("SomeCounter");
+     
+ 
+Everyone using session in their app must read [this excellent blog post](http://brockallen.com/2012/04/07/think-twice-about-using-session-state/).
