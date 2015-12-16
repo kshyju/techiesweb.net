@@ -7,8 +7,6 @@ Using session in your ASP.NET 5 apps are a little tricky at first.
 Since ASP.NET 5 has been redesigned to be so modular/configurable, you need to explicitly enable sessions in your app.
 
 
-ViewBag and ViewData uses session data as the backing storage behind the scene to store temporaray data. So you need to enable session for ViewBag and ViewData to work.
-
 
 ### Step 1
 Project.json file is the central place where we define all the configuration options for the project. The dependecies section in this file
@@ -57,4 +55,13 @@ Also we need to update the `Configure` method to call the `UseSession` method on
 	   });
 	}
 
-That is all. You should be good to use session variables (also now viewbag and viewdata too) in your ASP.NET 5 applications.
+That is all. You should be good to use session variables in your ASP.NET 5 applications.
+
+
+To set session,
+
+     HttpContext.Session.SetInt32("SomeCounter",1)
+      
+To get session,
+
+     var val = HttpContext.Session.GetInt32("SomeCounter");
