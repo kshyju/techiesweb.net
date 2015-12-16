@@ -3,6 +3,8 @@ layout: post
 title: How to use Session variables in ASP.NET 5
 date: 2015-12-07 00:11:29.000000000 -05:00
 ---
+
+
 Using session in your ASP.NET 5 apps are a little tricky at first.
 Since ASP.NET 5 has been redesigned to be so modular/configurable, you need to explicitly enable sessions in your app.
 
@@ -67,4 +69,5 @@ To get session,
      var val = HttpContext.Session.GetInt32("SomeCounter");
      
  
-Everyone using session in their app must read [this excellent blog post](http://brockallen.com/2012/04/07/think-twice-about-using-session-state/).
+
+Anyone using session in their app MUST READ [this excellent blog post](http://brockallen.com/2012/04/07/think-twice-about-using-session-state/).
