@@ -5,9 +5,11 @@ date: 2016-10-01 00:11:29.000000000 -05:00
 tags: [tag helpers, aspnetcore, gravatar]
 ---
 
+[![Gravatar tag helper][2]][1]
 
+  [1]: http://techiesweb.net/2016/10/01/asp-net-core-custom-tag-helper-for-gravatar-image.html
+  [2]: http://techiesweb.net/assets/AspNetCoreGravatarTagHelper.png
 
-![My helpful screenshot]({{ site.url }}/assets/AspNetCoreGravatarTagHelper.png)
 
 As we have [excellent documentation](https://docs.asp.net/en/latest/mvc/views/tag-helpers/intro.html) on the official documentation page explaining  in detail what tag helpers are and what problem they solve, i am not going to repeat that here.This is going to be mostly code :)
 
