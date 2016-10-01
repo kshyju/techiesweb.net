@@ -7,7 +7,7 @@ tags: [tag helpers, aspnetcore, gravatar]
 
 
 
-
+![My helpful screenshot]({{ site.url }}/assets/AspNetCoreGravatarTagHelper.png)
 
 As we have [excellent documentation](https://docs.asp.net/en/latest/mvc/views/tag-helpers/intro.html) on the official documentation page explaining  in detail what tag helpers are and what problem they solve, i am not going to repeat that here.This is going to be mostly code :)
 
