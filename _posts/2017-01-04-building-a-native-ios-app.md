@@ -12,7 +12,8 @@ This was a side project with a friend to build a social diet sharing app. We sta
 Since i built the initial versions of the android app, i had a very good notion of the UI i was going to buid (consistency is important. I spent a good amout of time for UI layouts for  the android app). The next question was what platform we want to build it ? We originally had hybrid vs native discussion and  i convinced him to go for the native way. Coming from the C#/Typescript background, the choice between learning Objective C vs Swift was obvious.
 
 
-###Learning  a new language
+Learning  a new language
+====
 
 Swift 2 looked a lot like Typescript which i fell in love around that time. So picking up the language syntax was easy. With internet, learning a technology is not hard, it is the patience and persistence until you get what you want, takes you forward. With the help of internet i was able to build the intial version with the following basic features
 
@@ -21,7 +22,8 @@ Swift 2 looked a lot like Typescript which i fell in love around that time. So p
 3. User profile
 4. Search 
 
-###App store wait time
+App store wait time
+====
 After submitting the first version of the IOS app to the store, I kept refreshing my email every other hour checking for a response! When you are so eager( i was so eager to tell people our IOS app is out), thing happens very slowly! It took 7 days for me to get a response and it was not the one i was waiting for :( The appstore team rejected the app due to many reasons.
 
 1. There was no "flag post" feature
@@ -49,7 +51,8 @@ I shipped multiple updates to the app over the next few months including feature
 10. Facebook & Twitter Integration
 
 
-### Where is the app now ? 
+Where is the app now ? 
+====
 
 We decided to not continue maintaining the IOS app in the store anymore. So it is not available to download. I created a video of the app before deleting it from my phone. You can see it here. (It is around 10 minutes.Sorry! My video production skills are so poor :))
 
