@@ -25,7 +25,7 @@ Swift 2 looked a lot like Typescript which i fell in love around that time. So p
 After submitting the first version of the IOS app to the store, I kept refreshing my email every other hour checking for a response! When you are so eager( i was so eager to tell people our IOS app is out), thing happens very slowly! It took 7 days for me to get a response and it was not the one i was waiting for :( The appstore team rejected the app due to many reasons.
 
 1. There was no "flag post" feature
-2. Lack "Block user" feature
+2. Lack of "Block user" feature
 3. "Terms & Conditions" and "Privacy Policy" was missing.
 
 
@@ -33,7 +33,7 @@ I fixed the issues quickly and resubmitted. After another 6 days, i finaly got w
 
 ![Gravatar tag helper][1]
 
-[1]: /assets/caloric-approved.png
+[1]: /assets/Caloric-approved.png
 
 I shipped multiple updates to the app over the next few months including features like
 
@@ -46,11 +46,12 @@ I shipped multiple updates to the app over the next few months including feature
 7. Locations ( Using 4Square API)
 8. Post Category
 9. Ingredients & Calory information on post
+10. Facebook & Twitter Integration
 
 
 ### Where is the app now ? 
 
-We decided to not continue maintaining the IOS app in the store any more. So it is not available to download anymore. I created a video of the app before deleting it from my phone. You can see it here. (It is around 10 minutes.Sorry! My video production skills are so poor :))
+We decided to not continue maintaining the IOS app in the store anymore. So it is not available to download. I created a video of the app before deleting it from my phone. You can see it here. (It is around 10 minutes.Sorry! My video production skills are so poor :))
 
 <iframe width="700" height="495" src="http://www.youtube.com/embed/duDTEDQrYaU" frameborder="0" allowfullscreen></iframe>
 
