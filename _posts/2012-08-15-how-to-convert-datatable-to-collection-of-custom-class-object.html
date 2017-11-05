@@ -6,11 +6,11 @@ date: 2012-08-15 18:20:10.000000000 -04:00
 <p>Imagine you have a <code>DataTable</code> with Records and you want to Convert that to a List of your Custom class objects ? how do you do that ?</p>
 <p>The normal -straight forward way is to Loop through  each <code>DataRow</code>, Create a new instance of Custom class object, read the column values of the current row(iterator) in the loop and Set the Proerties of the object..</p>
 <p>The below code shows looping the DataRows and Creating an object of our Custom Customer Class and Setting the Properties and Adding to the Collection of Customer objects.</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/08/for-each-datatable.png"><img class="alignnone size-full wp-image-326" title="for-each-datatable" src="assets/for-each-datatable.png" alt="" width="567" height="293" /></a></p>
+<p><a href="/assets/for-each-datatable.png"><img class="alignnone size-full wp-image-326" title="for-each-datatable" src="/assets/for-each-datatable.png" alt="" width="567" height="293" /></a></p>
 <p>We can avoid this handwritten ForEach loop by using some <strong>LINQ</strong> syntax.  Generally LINQ queries works on data sources which implement the <code>IEnumerable</code>&lt;T&gt;/ <code>IQueryable</code>&lt;T&gt; Interface. But DataTable does not implement any of these. So we can not directly apply LINQ queries on a DataTable.</p>
 <p>But <code>DataTable</code> class has an extension method called <code>AsEnumerable</code> which returns an IEnumerable collection of DataRow. So we can apply the <code>AsEnumerable</code> function on a <code>DataTable</code> and then play with some LINQ on the resulting collection.</p>
 <p>So we can replace our previous version of code with the below one which make use of LINQ</p>
-<p><a href="http://www.techiesweb.net/wp-content/uploads/2012/08/linq-datatable.png"><img class="alignnone size-full wp-image-328" title="linq-datatable" src="assets/linq-datatable.png" alt="" width="626" height="248" /></a></p>
+<p><a href="assets/linq-datatable.png"><img class="alignnone size-full wp-image-328" title="linq-datatable" src="/assets/linq-datatable.png" alt="" width="626" height="248" /></a></p>
 <p>For more information visit the msdn page <a href="http://msdn.microsoft.com/en-us/library/system.data.datatableextensions.asenumerable(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/system.data.datatableextensions.asenumerable(v=vs.100).aspx</a>.</p>
 <p>Hope this helps you some day :)</p>
 <p>&nbsp;</p>

@@ -2,7 +2,7 @@
 layout: post
 title: Column Attribute in Entity Framework 5
 date: 2012-10-06 11:14:29.000000000 -04:00
-
+---
 <p>When developing applications using Entity Framework code first approach, you may use <code>Column </code>data annotation on your model properties to define what attributes that property has, ex : name, type etc.</p>
 <p>in Entity Framework 4.3.1,  ColumnAttribute is defined in <code>System.ComponentModel.DataAnnotations namespace</code> which is available in <code>EntityFramework.dll</code>. So you need to add a reference to EntityFramework.dll and include a <code>using</code> statement in your class to use that.</p>
 <pre class="brush:csharp">using System.ComponentModel.DataAnnotations;
