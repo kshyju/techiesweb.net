@@ -32,5 +32,5 @@ I  built a <a href="http://techiesweb.net/2017/01/04/building-a-native-ios-app.h
 
 I also created <a href="https://marketplace.visualstudio.com/search?term=publisher%3A%22Shyju%20K%22&target=VSTS&category=All%20categories&sortBy=Relevance">2 VSTS extensions</a>. Give it a try :)
 </p>
-<p>I have a twitter account where i mostly retweet useful stuff for developers,priamarly related to the dotnet & javascript eco system. <a href="https://twitter.com/kshyju" target="_blank">@kshyju</a></p>
+<p>I have a twitter account where i mostly retweet useful stuff for developers,primarily related to the dotnet & javascript eco system. <a href="https://twitter.com/kshyju" target="_blank">@kshyju</a></p>
 <p>This blog is hosted by github pages ❤️</p>
