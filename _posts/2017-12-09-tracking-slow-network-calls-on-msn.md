@@ -54,10 +54,10 @@ Track the response time spikes / anomalies
 
 ![Let me monitor your site][4]
 
-[4]: /assets/let-me-monitor-response-time-graph.png
+[4]: /assets/let-me-monitor-graph.png
 
 
-###Some observations
+### Some observations
 
 **Possibilities Puppeteer is opening to us**:  The google chrome team did an excellent job in building the puppeteer project. This project is going to make it easier to build automation testing of web applications, using just javascript! Take a look at [https://github.com/GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer) ❤️
 
