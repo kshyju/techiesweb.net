@@ -59,7 +59,7 @@ Track the response time spikes / anomalies
 
 ###Some observations
 
-**Possibilities Puppeteer is opening to us**:  The google chrome team did an excellent job in building the puppeteer project. This project is going to make it easier to build automation testing of web applications, using just javascript! Take a look at [https://github.com/GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer)
+**Possibilities Puppeteer is opening to us**:  The google chrome team did an excellent job in building the puppeteer project. This project is going to make it easier to build automation testing of web applications, using just javascript! Take a look at [https://github.com/GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer) ❤️
 
 **Scheduled tasks**: At the time of this writing, there is no direct way to setup a node js exe in windows as a scheduled task ( or atleast my reserch could not find one!). Fortunately, I had another machine running high sierra (which is a unix based OS) where I could setup a cron tab. It took a little bit of time for me to get used to setting up the job using terminal commands (I have been spoiled by GUIs)
 
