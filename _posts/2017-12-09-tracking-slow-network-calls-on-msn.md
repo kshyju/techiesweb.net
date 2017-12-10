@@ -89,7 +89,7 @@ The tool can be really useful if we add stuff like
 
 1. **Notifications when the behavior changes**. One we collect enough data, we can compare new data against our existing data set and identify issues. For example, let's say the call to `ast.js` has been always in the 200 to 400 ms range and if we get a abnormal response time (ex : 2 seconds), then we know something is not quite right. This can raise a flag/ notfication email to concerned team.
 
-2. **Record the response size**. Similar to the response time, If the response size is exceeding than a set threshold value, raise a flag/alert
+2. **Record the response size**. Similar to the response time, If the response size is exceeding  a set threshold value, raise a flag/alert
 3. The api does not provide the initiator information for any calls as of now (there is an open issue on the GH repo for that). Capturing that information will be really useful.
 
 
