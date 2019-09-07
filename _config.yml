@@ -1,8 +1,8 @@
 # Site settings
 title: TechiesWeb.NET
-email: 
+email:
 description: > # this means to ignore newlines until "baseurl:"
-  Tips and Tricks for ASP.NET MVC,ASP.NET Web Api, Angular JS and all other cool stuff
+  Tips and Tricks for ASP.NET MVC,ASP.NET Web Api, AspNetCore and all other cool stuff
 baseurl: "" # the subpath of your site, e.g. /blog/
 
 
