@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Browser detection in ASP.NET Core apps
+title: Browser detection in ASP.NET core
 date: 2019-09-07 00:00:00.000000000 -05:00
 tags: [BrowserDetection, Browser detection, DeviceTypeDetection, AspNet core Browser detection, Operating System detection]
-description: Browser detection in asp.net core and device detection in asp.net core
+description: Browser detection in asp.net, device detection in asp.net core, operating system detection in asp.net core
 
 ---
 
