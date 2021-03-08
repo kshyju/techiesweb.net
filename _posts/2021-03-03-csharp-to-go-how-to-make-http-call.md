@@ -7,7 +7,7 @@ description: C# developer's quick reference for Go snippets, How to make Http ca
 ---
 ## C# to Go - How to make HTTP call
 
-I have been dabbling with Go programming language lately(*really late to the party*😅) and really liking this language. Me, being a C# developer, thought it might be a good idea to rewrite some of the C# snippets as part of learning Go. As I was doing this exercise, I decided to scribble it down here as a quick reference to help anyone taking the same route (C# developer learning Go) or for myself in the future.
+I have been dabbling with Go programming language lately(*really late to the party*😅) and surely liking this language. Me, being a C# developer, thought it might be a good idea to rewrite some of the C# snippets as part of learning Go. As I was doing this exercise, I decided to scribble it down here as a quick reference to help anyone taking the same route (C# developer learning Go) or for myself in the future.
 
 
 Step 1, [Install go for your OS](https://golang.org/dl/).
@@ -16,7 +16,7 @@ Step 1, [Install go for your OS](https://golang.org/dl/).
 I am going to skip the Hello world sample here for obvious reasons and will be doing the Go equivalent of some the the C# snippets we will use in real world application development.
 
 
-## Http calls.
+## Http calls
 
 C# Console program code for making Http call
 
@@ -68,7 +68,7 @@ Go program (almost) equivalent for making Http call
         }
     }
 
-You can check [this github repo](https://github.com/kshyju/CSharpToGo) for more samples.
+You can check [this github repo](https://github.com/kshyju/CSharpToGo) for more samples. 
 
 Cheers
 
