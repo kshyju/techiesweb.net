@@ -68,6 +68,7 @@ Go program (almost) equivalent for making Http call
         }
     }
 
+You can check [this github repo](https://github.com/kshyju/CSharpToGo) for more samples.
 
 Cheers
 
