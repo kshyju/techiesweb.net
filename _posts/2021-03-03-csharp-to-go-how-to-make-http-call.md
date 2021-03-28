@@ -1,11 +1,11 @@
 ---
 layout: post
-title: C# to Go - How to make HTTP call
+title: C# to Go - How to make HTTP call in Go
 date: 2021-03-03 00:00:00.000000000 -05:00
 tags: [CSharp to Go, C# to go, HttpClient in Go, REST call in Go, Http call in go]
 description: C# developer's quick reference for Go snippets, How to make Http call in Go
 ---
-## C# to Go - How to make HTTP call
+## C# to Go - How to make HTTP call in Go
 
 I have been dabbling with Go programming language lately(*really late to the party*😅) and surely liking this language. Me, being a C# developer, thought it might be a good idea to rewrite some of the C# snippets as part of learning Go. As I was doing this exercise, I decided to scribble it down here as a quick reference to help anyone taking the same route (C# developer learning Go) or for myself in the future.
 
