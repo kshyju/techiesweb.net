@@ -10,7 +10,7 @@ description: C# developer's quick reference for Go snippets, How to wait for an 
 In C#, `Task.WhenAll` allows us to wait for a collection of tasks(which may be executed concurrently) to finish. In go, we can use `WaitGroup` from `sync` package along with goroutines to achieve similar thing.
 
 
-## WaitAll
+## WhenAll
 
 C# Console program code using `Task.WhenAll` to wait for the completion of a bunch of tasks running parallely.
 
