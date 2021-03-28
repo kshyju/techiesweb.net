@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C# to Go - How to use StopWatch in Go
-date: 2021-03-03 00:00:00.000000000 -05:00
+date: 2021-03-21 00:00:00.000000000 -05:00
 tags: [CSharp to Go, C# to go, Stopwatch in Go, Measure method execution time in Go, Go stopwatch]
 description: C# developer's quick reference for Go snippets, How to use StopWatch in Go
 ---
