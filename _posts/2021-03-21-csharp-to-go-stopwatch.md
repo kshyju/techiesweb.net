@@ -61,7 +61,7 @@ C# Console program code using StopWatch to record elapsed time.
     }
 
 
-Go program (almost) equivalent for making Http call
+Go program (almost) equivalent for recording elapsed time.
 
     package main
 

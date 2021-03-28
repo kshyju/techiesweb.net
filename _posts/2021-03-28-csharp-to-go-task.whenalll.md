@@ -1,9 +1,9 @@
 ---
 layout: post
-title: C# to Go - How to use StopWatch in Go
+title: C# to Go - How to wait for an array of sub tasks to finish in Go
 date: 2021-03-28 00:00:00.000000000 -05:00
-tags: [CSharp to Go, C# to go, Stopwatch in Go, Measure method execution time in Go, Go stopwatch]
-description: C# developer's quick reference for Go snippets, How to use StopWatch in Go
+tags: [CSharp to Go, C# to go, Task.WhenAll in Go, When.All in Go, Go Task.WhenAll, Go Wait for goroutines]
+description: C# developer's quick reference for Go snippets, How to wait for an array of sub tasks to finish in Go
 ---
 ## C# to Go - How to wait for an array of sub tasks to finish
 
