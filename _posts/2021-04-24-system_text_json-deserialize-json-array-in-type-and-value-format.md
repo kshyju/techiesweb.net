@@ -154,6 +154,7 @@ Finally, you have to hook this up with the type/property. I chose to do this on 
 With this STJ can deserialize our non standard JSON string to `Person` instance properly.
 
 
+![Test results](/assets/2021_04_STJ-JsonConverter-Tests.png)
 Further reading:
 
 
@@ -164,6 +165,8 @@ Further reading:
 * [Utf8JsonReader](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.utf8jsonreader?view=net-5.0)
 
 * [JSON attacks](https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-JSON-Attacks-wp.pdf)
+
+* [https://blog.maartenballiauw.be/post/2020/01/29/deserializing-json-into-polymorphic-classes-with-systemtextjson.html](https://blog.maartenballiauw.be/post/2020/01/29/deserializing-json-into-polymorphic-classes-with-systemtextjson.html)(This was a really helpful post for me while writing the converter for the first time)
 
 
 Cheers
