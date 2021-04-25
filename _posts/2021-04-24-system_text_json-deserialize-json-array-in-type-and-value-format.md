@@ -154,7 +154,7 @@ Finally, you have to hook this up with the type/property. I chose to do this on 
 With this STJ can deserialize our non standard JSON string to `Person` instance properly.
 
 
-![Test results](/assets/2021_04_STJ-JsonConverter-Tests.png)
+![Test results](/assets/2021_04_24-STJ-JsonConverter-Tests.png)
 Further reading:
 
 
