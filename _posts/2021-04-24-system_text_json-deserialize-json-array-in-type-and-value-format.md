@@ -157,13 +157,13 @@ With this STJ can deserialize our non standard JSON string to `Person` instance 
 Further reading:
 
 
-* https://github.com/dotnet/runtime/issues/30969#issuecomment-535779492
+* [https://github.com/dotnet/runtime/issues/30969#issuecomment-535779492](https://github.com/dotnet/runtime/issues/30969#issuecomment-535779492)
 
-* https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-core-3-1
+* [How to write custom converters for JSON serialization](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-core-3-1)
 
-* https://docs.microsoft.com/en-us/dotnet/api/system.text.json.utf8jsonreader?view=net-5.0
+* [Utf8JsonReader](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.utf8jsonreader?view=net-5.0)
 
-* https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-JSON-Attacks-wp.pdf
+* [JSON attacks](https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-JSON-Attacks-wp.pdf)
 
 
 Cheers
