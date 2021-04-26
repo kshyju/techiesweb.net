@@ -95,27 +95,23 @@ Take a minute to read the documentation: https://docs.microsoft.com/en-us/dotnet
 
 I ended up writing my converter like below. The trick is to loop through the tokens, when you find the StartArray type token, deserialize from that position onwards.
 
+    
     public sealed class VehiclesArrayConverter : JsonConverter<List<Vehicle>>
     {
         public override List<Vehicle> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             // Let's check we are dealing with a proper array format([]) adhering to the JSON spec.
-            // JsonReader is a forward only reader.
-            // We will read the next token from a copy of the JsonReader for checking our next token is a normal object.
-            // If the first token is a normal object, we are dealing with a proper array.
-            var readerCopy = reader;
-            readerCopy.Read();
-            if (readerCopy.TokenType == JsonTokenType.StartObject)
+            if (reader.TokenType == JsonTokenType.StartArray)
             {
                 // Proper array, we can deserialize from this token onwards.
                 return JsonSerializer.Deserialize<List<Vehicle>>(ref reader, options);
             }
             
             // If we reached here, it means we are dealing with the JSON array in non proper array form
-            // ie: using an object structure with "$type" and "$values" format.
+            // ie: using an object structure with "$type" and "$values" format like below 
             // We will go through each token and when we get the array type inside (for $values),
             // We will deserialize that token. We exit when we reaches the next end object.
-
+            
             List<Vehicle> list = null;
             while (reader.Read())
             {
@@ -125,8 +121,7 @@ I ended up writing my converter like below. The trick is to loop through the tok
                 }
                 if (reader.TokenType == JsonTokenType.EndObject)
                 {
-                    // finished processing the array and 
-                    // reached the outer closing bracket token of wrapper object.
+                    // finished processing the array and reached the outer closing bracket token of wrapper object.
                     break;
                 }
             }
@@ -136,10 +131,10 @@ I ended up writing my converter like below. The trick is to loop through the tok
 
         public override void Write(Utf8JsonWriter writer, List<Vehicle> value, JsonSerializerOptions options)
         {
-            // No special handling. use default behavior
+            // Nothing special to do in write operation. So use default serialize method.
             JsonSerializer.Serialize(writer, value, value.GetType(), options);
         }
-    }
+    } 
 
 Finally, you have to hook this up with the type/property. I chose to do this on the property level using the `JsonConverter` attribute.
 
@@ -155,6 +150,9 @@ With this STJ can deserialize our non standard JSON string to `Person` instance 
 
 
 ![Test results](/assets/2021_04_24-STJ-JsonConverter-Tests.png)
+
+Couple of unit tests covering different cases: https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a
+
 Further reading:
 
 
