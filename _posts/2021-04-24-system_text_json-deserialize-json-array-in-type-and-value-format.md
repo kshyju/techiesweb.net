@@ -50,8 +50,8 @@ A valid JSON string adhering to RFC spec, which can be successfully deserialized
 
 Deserialization for the above JSON string works fine with both Newtonsoft JSON.NET and System.Text.JSON
 
-    var personNewtonSoft = System.Text.Json.JsonSerializer.Deserialize<Person>(json, _options);
-    var personSystemTextJson = Newtonsoft.Json.JsonConvert.DeserializeObject<CardInfo>(json);
+    var personSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Person>(json, _options);
+    var personNewtonSoft = Newtonsoft.Json.JsonConvert.DeserializeObject<CardInfo>(json);
 
 ## The other array format
 
@@ -150,6 +150,56 @@ With this STJ can deserialize our non standard JSON string to `Person` instance 
 
 
 ![Test results](/assets/2021_04_24-STJ-JsonConverter-Tests.png)
+
+We can make our implementation a bit more generic with [C# generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters#why-use-constraints). Here is a generic version of our converter.
+
+    public sealed class NonStrictArrayConverter<T> : JsonConverter<T>  where T : IEnumerable
+    {
+        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType == JsonTokenType.StartArray)
+            {
+                // Proper array, we can deserialize from this token onwards.
+                return JsonSerializer.Deserialize<T>(ref reader, options);
+            }
+            
+            var value = default(T);
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.StartArray)
+                {
+                    value = JsonSerializer.Deserialize<T>(ref reader, options);
+                }
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    // finished processing the array and reached the outer closing bracket token of wrapper object.
+                    break;
+                }
+            }
+
+            return value;
+        }
+
+        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+        {
+            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        }
+    }
+
+and we can hook it up to any collection properties.
+
+    public sealed class Person
+    {
+        public string? FullName { get; set; }
+        
+        [JsonConverter(typeof(NonStrictArrayConverter<IReadOnlyList<Vehicle>>))]
+        public IReadOnlyList<Vehicle>? Vehicles { get; set; }
+        
+        [JsonConverter(typeof(NonStrictArrayConverter<List<Color>>))]
+        public List<Color>? Colors { get; set; }
+        
+        public string[]? Aliases { get; set; }
+    }
 
 Couple of unit tests covering different cases: [https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a](https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a)
 
