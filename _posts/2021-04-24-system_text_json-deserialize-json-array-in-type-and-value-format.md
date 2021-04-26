@@ -151,7 +151,7 @@ With this STJ can deserialize our non standard JSON string to `Person` instance 
 
 ![Test results](/assets/2021_04_24-STJ-JsonConverter-Tests.png)
 
-Couple of unit tests covering different cases: https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a
+Couple of unit tests covering different cases: [https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a](https://gist.github.com/kshyju/54d3dd1ee196a4d6c5fd61794d70027a)
 
 Further reading:
 
