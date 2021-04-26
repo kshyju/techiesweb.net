@@ -91,7 +91,7 @@ Ideally we should consider fixing the JSON to be following the spec. But in my c
 
 A converter basically allows us to customize the behavior of serialization/deserialization. So in my case, I created a converter for handling the deserialization of the type `List<Vehicle>`
 
-Take a minute to read the documentation: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-core-3-1
+[Spend a few minutes to read the official documentation](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-core-3-1)
 
 I ended up writing my converter like below. The trick is to loop through the tokens, when you find the StartArray type token, deserialize from that position onwards.
 
