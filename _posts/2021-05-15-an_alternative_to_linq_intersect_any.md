@@ -16,6 +16,7 @@ Over 80 % of the time is spent in the linq expression where the `Any` extension 
 
 Looking at the source code of the method, our goal of using this linq expression was to find there is a common element present between two string collections. Something like below.
 
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021LinqIntersectAnyUsageSample.cs"></script>
 
     IEnumerable<string> first = new[] {"one", "two", "three","four","five","six","seven","eight"};
     IEnumerable<string> second = new[] { "two", "three"};
