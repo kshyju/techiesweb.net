@@ -36,7 +36,7 @@ In my case, All I care about is finding out whether we have a common element pre
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyExtension.cs"></script>
 
-This may look like a brute force solution. Would it do better compared to the LINQ expression? Only way to tell that by measuring both implementations. So I wrote benchmarking code for these 2 implementations.
+This may look like a brute force solution. Would it do better compared to the LINQ expression? Only way to tell that is by measuring both implementations. So I wrote benchmarking code for these 2 implementations with 2 types of source collections, Arrays and Lists. Our extension method uses a for loop on an array. So If the collection passed in is not an array, it will call the `AsArray` extension method to convert that collection to an array.
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyBenchmarks.cs"></script>
 
@@ -46,8 +46,8 @@ The benchmark results
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyBenchmarkResults.md"></script>
 
 The benchmark results clearly shows:
- * When both the source collections are Arrays, the custom implementation is 7 times faster than the LINQ expression. Also it allocates 0 bytes (no hash code allocation in managed heap. The for loop runs in the stack)
-  * When both the source collections are Lists, the custom implementation is 4.5 times faster than the LINQ expression. There is allocation where our `AsArray` method has to convert the collection to an Array. But still a lot smaller than what the LINQ expression allocated.
+ * When both the source collections are Arrays, the custom implementation is **7 times faster** than the LINQ expression. Also it allocates 0 bytes (no hash code allocation in managed heap. The for loop runs in the stack)
+  * When both the source collections are Lists, the custom implementation is **4.5 times faster** than the LINQ expression. There is allocation where our `AsArray` method has to convert the collection to an Array. But still a lot smaller than what the LINQ expression allocated.
 
 And finally, after deploying the fix to prod, I went back and checked the prod profiler data again.
 
@@ -56,8 +56,8 @@ And finally, after deploying the fix to prod, I went back and checked the prod p
 
 The `GetData` method now consumes 1.6 % CPU where it used to consume around 5 %.
 
-Important take away is, 
- * LINQ expression is concise, but may not be optimal if that is being used in a hot path.
+Important takeaways are, 
+ * LINQ expression is concise, but may not be optimal if that is being used in a hot path. Many times, you can write a faster implementation which handles *your specific use case*
  * Measure, Fix, Measure again, Repeat.
 
 Cheers
