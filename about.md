@@ -8,10 +8,11 @@ permalink: /about/
 Hi there, my name is Shyju and I am a curious developer who is passionate about learning new things and building useful stuff. I use this blog as a platform to scribble down little tips and tricks which might help me/others in future.
 </p>
 <p>
-<a href="http://techiesweb.net/2016/10/10/mvp-award-2016-ThankYou.html">I am a former ASP.NET MVP.</a>Here is my <a href="https://mvp.microsoft.com/en-us/PublicProfile/5002157?fullName=Shyju%20%20Krishnankutty" target="_blank">MVP Profile</a>. Been a [blue badge holder](https://techiesweb.net/2018/03/18/new-adventure-at-microsoft.html) since March 2018.
+<a href="http://techiesweb.net/2016/10/10/mvp-award-2016-ThankYou.html">I am a former ASP.NET MVP.</a>Here is my <a href="https://mvp.microsoft.com/en-us/PublicProfile/5002157?fullName=Shyju%20%20Krishnankutty" target="_blank">MVP Profile</a>. Been a <a href="https://techiesweb.net/2018/03/18/new-adventure-at-microsoft.html">blue badge holder</a> since March 2018.
 </p>
 
-<p>My cv on stackoverflow : <a href="http://stackoverflow.com/story/kshyju">http://stackoverflow.com/story/kshyju</a></p>
+<p><a href="https://mvp.microsoft.com/en-us/PublicProfile/5002157?fullName=Shyju%20%20Krishnankutty">MVP Profile</a></p>
+<p><a href="http://stackoverflow.com/story/kshyju">StackOverflow Developer story</a></p>
 
 <p>
 <a href="https://stackoverflow.com/users/40521/shyju">
