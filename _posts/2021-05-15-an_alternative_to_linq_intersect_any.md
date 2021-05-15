@@ -39,10 +39,7 @@ The method returns an Enumerable collection(deferred execution). So If the `Any`
 In my case, All I care about is finding out whether we have a common element present between these 2 collections. We could do this just with a nested for loop. So I ended up with this extension method.
 
  {% gist 0ea21880e8faf7990d533f3a2b5f963d %}
-
-
-<script src="https://gist.github.com/kshyju/0ea21880e8faf7990d533f3a2b5f963d.js"></script>
-
+ {% gist d1903a06b84263de4a458f7046247dab#file-linqintersectanyusagesample-cs %}
 
 
 Cheers
