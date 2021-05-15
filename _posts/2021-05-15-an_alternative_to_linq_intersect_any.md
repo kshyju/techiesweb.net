@@ -1,11 +1,11 @@
 ---
 layout: post
-title: A fast alteratvie to Linq's Intersect.Any() expression result
+title: A fast alternative to Linq's Intersect.Any() expression result
 date: 2021-05-15 00:00:00.000000000 -05:00
 tags: [LINQ]
-description: A fast alteratvie to Linq's Intersect.Any() expression result
+description: A fast alternative to Linq's Intersect.Any() expression result
 ---
-## A fast alteratvie to Linq's Intersect.Any() expression result
+## A fast alternative to Linq's Intersect.Any() expression result
 
 While looking at the profiling data of one of our production systems, I stumpled across this intesteting block in the flamegraph. 
 
@@ -17,17 +17,6 @@ Over 80 % of the time is spent in the linq expression where the `Any` extension 
 Looking at the source code of the method, our goal of using this linq expression was to find there is a common element present between two string collections. Something like below.
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021LinqIntersectAnyUsageSample.cs"></script>
-
-two
-<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=file-blog2021linqintersectanyusagesample-cs"></script>
-
-the
-<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=blog2021linqintersectanyusagesample-cs"></script>
-
-    IEnumerable<string> first = new[] {"one", "two", "three","four","five","six","seven","eight"};
-    IEnumerable<string> second = new[] { "two", "three"};
-
-    var matchFound = first.Intersect(second,  StringComparer.OrdinalIgnoreCase).Any();
 
 The profiler also tells us that this method took ~5 % of total CPU of our service process.
 
@@ -45,8 +34,7 @@ The method returns an Enumerable collection(deferred execution). So If the `Any`
 
 In my case, All I care about is finding out whether we have a common element present between these 2 collections. We could do this just with a nested for loop. So I ended up with this extension method.
 
- {% gist 0ea21880e8faf7990d533f3a2b5f963d %}
- {% gist d1903a06b84263de4a458f7046247dab#file-linqintersectanyusagesample-cs %}
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyExtension.cs"></script>
 
 
 Cheers
