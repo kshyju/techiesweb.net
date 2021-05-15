@@ -36,6 +36,19 @@ In my case, All I care about is finding out whether we have a common element pre
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyExtension.cs"></script>
 
+This may look like a brute force solution. Would it do better compared to the LINQ expression? Only way to tell that by measuring both implementations. So I wrote benchmarking code for these 2 implementations.
+
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyBenchmarks.cs"></script>
+
+
+Benchmark results
+
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyBenchmarkResults.md"></script>
+
+And finally, after deploying the fix to prod, I went back and checked the prod profiler data again.
+
+![total cpu usage of method](/assets/2021_05_15_after-getdata)
+![total cpu usage of method](/assets/2021_05_15_after-total-cpu.png)
 
 Cheers
 
