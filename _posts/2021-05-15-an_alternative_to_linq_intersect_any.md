@@ -18,6 +18,12 @@ Looking at the source code of the method, our goal of using this linq expression
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021LinqIntersectAnyUsageSample.cs"></script>
 
+two
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=file-blog2021linqintersectanyusagesample-cs"></script>
+
+the
+<script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=blog2021linqintersectanyusagesample-cs"></script>
+
     IEnumerable<string> first = new[] {"one", "two", "three","four","five","six","seven","eight"};
     IEnumerable<string> second = new[] { "two", "three"};
 
