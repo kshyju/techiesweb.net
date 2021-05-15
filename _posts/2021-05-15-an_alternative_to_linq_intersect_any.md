@@ -56,7 +56,7 @@ And finally, after deploying the fix to prod, I went back and checked the prod p
 
 The `GetData` method now consumes 1.6 % CPU where it used to consume around 5 %.
 
-Important takeaways are, 
+Key takeaways are, 
  * LINQ expression is concise, but may not be optimal if that is being used in a hot path. Many times, you can write a faster implementation which handles *your specific use case*
  * Measure, Fix, Measure again, Repeat.
 
