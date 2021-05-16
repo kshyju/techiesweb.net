@@ -32,7 +32,7 @@ Looking at the source code of `Intersect` method, we can see it does two things.
 
 The `Intersect` method returns an Enumerable collection(deferred execution). So If the `Any` method returns `True`, it won't execute the code for remaining elements in second collection.
 
-In my case, All I care about is finding out whether we have a common element present between these 2 collections. We could do this just with a nested for loop without allocating the HashSet. We could also eliminate the hash generation during the Remove method call. So I ended up with this extension method.
+In my case, All I care about is finding out whether we have a common element present between these 2 collections. We could do this just with a nested for loop without allocating the HashSet. We could also eliminate the hash generation during the `Remove` method call. I wrote an extension method like below which uses 2 simple for loops.
 
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyExtension.cs"></script>
 
