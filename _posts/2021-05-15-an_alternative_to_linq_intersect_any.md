@@ -46,7 +46,7 @@ The benchmark results
 <script src="https://gist.github.com/kshyju/d1903a06b84263de4a458f7046247dab.js?file=Blog2021MyIntersectAnyBenchmarkResults.md"></script>
 
 The benchmark results clearly shows:
- * When both the source collections are Arrays, the custom implementation is **7 times faster** than the LINQ expression. Also it allocates 0 bytes (no hash code allocation in managed heap. The for loop runs in the stack)
+ * When both the source collections are Arrays, the custom implementation is **7 times faster** than the LINQ expression. Also it allocates 0 bytes (no hash set allocation in managed heap. The for loop runs on the stack)
   * When both the source collections are Lists, the custom implementation is **4.5 times faster** than the LINQ expression. There is allocation where our `AsArray` method has to convert the collection to an Array. But still a lot smaller than what the LINQ expression allocated.
 
 And finally, after deploying the fix to prod, I went back and checked the prod profiler data again.
