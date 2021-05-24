@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Go-load, A simple load testing tool
+title: Go-load, A simple load testing tool written in golang
 date: 2021-05-23 00:00:00.000000000 -05:00
 tags: [Go,GoLoad, Load testing tool, stress testing tool]
 description: A simple load testing tool to generate load test traffic.
 ---
-## Go-load, A simple load testing tool
-As I was learning golang, I wrote a simple load testing tool in it. 
+## Go-load, A simple load testing tool written in golang
+As I was learning golang, I wrote a simple load testing tool in it and have been using it for generating consistent load test traffic while I try to collect profiling data on my .net apps.
 
 ### Usage
 
