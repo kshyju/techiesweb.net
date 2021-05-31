@@ -56,7 +56,7 @@ Where is the app now ?
 
 We decided to not continue maintaining the IOS app in the store anymore. So it is not available to download. I created a video of the app before deleting it from my phone. You can see it here. (It is around 10 minutes. Sorry! My video production skills are so poor :))
 
-<iframe width="700" height="495" src="http://www.youtube.com/embed/duDTEDQrYaU" frameborder="0" allowfullscreen></iframe>
+[https://youtu.be/duDTEDQrYaU](https://youtu.be/duDTEDQrYaU)
 
 I really enjoyed building the native app from scratch. I plan on sharing the useful code snippets & tricks on swift / IOS development.
 
