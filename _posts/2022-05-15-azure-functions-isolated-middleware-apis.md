@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Useful APIs for writing azure function middleware
+title: Useful APIs for writing azure functions middleware
 date: 2022-05-15 00:00:00.000000000 -05:00
 tags: [Azure functions, Functions, Isolated azure functions, Middleware, Functions middleware, IFunctionsWorkerMiddleware, GetHttpRequestDataAsync, GetInvocationResult, GetHttpResponseData]
 description: Useful APIs for writing azure function middleware.
