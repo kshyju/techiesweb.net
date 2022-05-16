@@ -2,8 +2,8 @@
 layout: post
 title: Useful APIs for writing azure function middleware
 date: 2022-05-15 00:00:00.000000000 -05:00
-tags: [Azure functions, Functions, Isolated, Middleware]
-description: Useful APIs for writing azure function middleware
+tags: [Azure functions, Functions, Isolated azure functions, Middleware, Functions middleware, IFunctionsWorkerMiddleware, GetHttpRequestDataAsync, GetInvocationResult, GetHttpResponseData]
+description: Useful APIs for writing azure function middleware.
 ---
 
 One of the benefits of using isolated (out-of-process) model is the ability to plug in custom middlewares in the invocation pipeline. In this post, I will go through some of the handy APIs you can use to make your middleware authoring experience easier. All these APIs are extension methods on `FunctionContext` instance which is available in the `Invoke` method of the middleware. 
