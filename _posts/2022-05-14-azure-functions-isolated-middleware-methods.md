@@ -6,13 +6,13 @@ tags: [Azure functions, Functions, Isolated, Middleware]
 description: Useful APIs for writing azure function middleware
 ---
 
-One of the benefits of using isolated (out-of-process) model is the ability to plug in custom middlewares in the invocation pipeline. In this post, I will go through some of the handy APIs you can use to make your middleware authoring experience easier. All of these APIs are extension methods on `FunctionContext` instance which is available in the `Invoke` method of the middleware. 
+One of the benefits of using isolated (out-of-process) model is the ability to plug in custom middlewares in the invocation pipeline. In this post, I will go through some of the handy APIs you can use to make your middleware authoring experience easier. All these APIs are extension methods on `FunctionContext` instance which is available in the `Invoke` method of the middleware. 
 
 
 
 ### HTTP Trigger specific APIs
 
-Let's take a look at 2 APIs specific to Http triggers.
+Let us take a look at 2 APIs specific to Http triggers.
 
 #### GetHttpRequestDataAsync
 
