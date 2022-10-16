@@ -6,16 +6,16 @@ tags: [Azure functions, Functions, Isolated azure functions, Azure functions V1 
 description: Azure functions V1(in-proc) to V4(isolated) migration.
 ---
 
-Azure functions dotnet isolated model recently started supporting  function app creation with .NET Framework as target framework. This is great news for devs maintaining V1 version of function apps because they can now migrate their V1 apps to the latest function runtime version(V4).
+Azure functions dotnet isolated model recently started supporting  function app creation with .NET Framework as target framework. This is great news for devs maintaining V1 version of function apps because they can now migrate their V1 apps to the latest function runtime version([V4](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/azure-functions-4-0-and-net-6-support-are-now-generally/ba-p/2933245)).
 
 Let's take a look at the version history of function apps with the TFM & hosting models it supported.
 
 | Function runtime 	| TFM support                                                                          	|
 |------------------	|--------------------------------------------------------------------------------------	|
-| V1               	| .NET framework, In-proc only                                                         	|
-| V2 (Deprecated)  	| .Net core 2.X                                                                        	|
-| V3               	| Out of process model is introduced. .NET 5<br>In-proc model with .Net core 3.X       	|
-| V4               	| In-proc model with .Net 6<br>Out of process model is .Net6, .Net7 and .NET framework 	|
+| V1               	| .NET framework, In-proc.only                                                         	|
+| V2 (Deprecated)  	| .Net core 2.X.                                                                        	|
+| V3               	| Out of process model is introduced. .NET 5.<br>In-proc model with .Net core 3.X.       	|
+| V4               	| In-proc model with .Net 6.<br>Out of process model is .Net6, .Net7 and .NET framework. 	|
 
 
 Until now, function apps created with V1 version could not migrate to the newer versions of functions runtime while maintaining the target framework, but it is possible now with the isolated model support of .NET framework TFM.
