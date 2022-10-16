@@ -64,7 +64,6 @@ You can remove `AzureWebJobsDashboard` entry if present in your config.
 }
 ```
 
-
 ### 3) Add a Program.cs with startup code
 
 Create a new class called `Program.cs` and paste the below code to it.
@@ -85,22 +84,28 @@ internal class Program
 }
 ```
 
-This is the bootstrapping code for the isolated application. It creates a [generic host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host), configure the services needed for it to work as a function app, build the host and run it. 
+This is the bootstrapping code for the isolated function application. It creates a [generic host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host), configure the services needed for it to work as a function app, build the host and run it. This is where you will register additional [dependencies to the DI container](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection) or configure logging etc, as needed.
 
 ### 4) Switch to the new types
 
 The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. In the isolated model, we do not use these types, instead a new set of types were introduced in the isolated model. So replace the using statements with `using Microsoft.Azure.Functions.Worker` from which we will use a few types.
 
- - In in-proc model, functions are decorated with the `FunctionName` attribute. In te isolated model, we will use the `Function` attribute.
- - In the Isolated model, the HttpRequestData type wraps information about the http request, instead of `HttpRequestMessage`
- - In the Isolated model, the `HttpResponseData` type should be used as the return type for Http functions.
+ - In in-proc model, functions are decorated with the `FunctionName` attribute. In the isolated model, we will use the `Function` attribute.
+ - In the Isolated model, the [HttpRequestData](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.http.httprequestdata?view=azure-dotnet) type wraps information about the http request, instead of `HttpRequestMessage`
+ - In the Isolated model, the [HttpResponseData](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.http.httpresponsedata?view=azure-dotnet) type should be used as the return type for Http functions.
+ - For logging, V1 in-proc app uses `TraceWriter` from Microsoft.Azure.WebJobs.Host. In the V4 isolated model, you will use the ILogger. This experience will be same as [logging in .net/ASP.NET core apps](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-6.0). You can inject an ILogger instance via constructor injection. See example [here](https://github.com/Azure/azure-functions-dotnet-worker/blob/4400fa36120327130b73496970d7c9740b26f981/samples/NetFxWorker/HttpFunction.cs#L13-L18)
+ - You can add a parameter of type [FunctionContext](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.functioncontext?view=azure-dotnet) in your functions to get contextual information about the function being executed. See example [here](https://github.com/Azure/azure-functions-dotnet-worker/blob/4400fa36120327130b73496970d7c9740b26f981/samples/CustomMiddleware/HttpFunction.cs#L15-L16).
+
 
  > _Ideally, An isolated function should not have any reference to the `Microsoft.Azure.WebJobs` package. Packages with `Microsoft.Azure.Functions.Worker` [prefix]( https://www.nuget.org/packages?q=Microsoft.Azure.Functions.Worker) is what you need in your isolated function app._
 
 
 You should be good to run your app now. If you are using Visual studio, press F5 to start debugging.
 
-Here are some useful links to help you with migration:
+> _For users who uses Visual Studio as their IDE, you need to use [Visual studio 2022 Preview](https://visualstudio.microsoft.com/vs/preview/) 17.4.0 Preview 3 or later for F5 debugging to work._
+
+
+Here are some useful links to make your migration experience a breeze:
 
 1. [Guide for running C# Azure Functions in an isolated process](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
 2. [Refer this sample solution](https://github.com/kshyju/NetFXMigrationSample) which has V1 in-proc project and V4 isolated version of the same.
