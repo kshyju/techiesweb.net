@@ -48,30 +48,6 @@ So after these changes, your .csproj file will look like this:
 
 <script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=V4NetFxcsproj.cs"></script>
 
-```
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-    <OutputType>Exe</OutputType>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.10.0" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.7.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="host.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="local.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
-</Project>
-```
-
 ### 2) Update configuration files
 
 Open your `local.settings.json` file and add a new entry under `Values` with key `FUNCTIONS_WORKER_RUNTIME` and value `dotnet-isolated`
@@ -113,7 +89,7 @@ This is the bootstrapping code for the isolated application. It creates a [gener
 
 ### 4) Switch to the new types
 
-The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. In the isolated model we do not use these types, instead a new set of types were introduced in the isolated model. So replace the using statements with `using Microsoft.Azure.Functions.Worker` from which we will use a few types.
+The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. In the isolated model, we do not use these types, instead a new set of types were introduced in the isolated model. So replace the using statements with `using Microsoft.Azure.Functions.Worker` from which we will use a few types.
 
  - In in-proc model, functions are decorated with the `FunctionName` attribute. In te isolated model, we will use the `Function` attribute.
  - In the Isolated model, the HttpRequestData type wraps information about the http request, instead of `HttpRequestMessage`
@@ -131,6 +107,7 @@ Here are some useful links to help you with migration:
 1. [Guide for running C# Azure Functions in an isolated process](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
 2. [Refer this sample solution](https://github.com/kshyju/NetFXMigrationSample) which has V1 in-proc project and V4 isolated version of the same.
 2. [Isolated function app samples in the dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/tree/main/samples)
+3. [Bindings & Triggers in isolated model](https://github.com/Azure/azure-functions-dotnet-worker/wiki/.NET-Worker-bindings)
 3. [Follow Azure functions on twitter](https://twitter.com/AzureFunctions)
 
 If you are running into issues with the migration process, please open a new issue in the [dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/issues). 
