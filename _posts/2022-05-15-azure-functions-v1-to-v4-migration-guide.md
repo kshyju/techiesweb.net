@@ -46,7 +46,7 @@ Open your project file (.csproj) and make the below edits.
 
 So after these changes, your .csproj file will look like this:
 
-<script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=v4-netfx-csproj-xml"></script>
+<script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=V4NetFxcsproj.cs"></script>
 
 <script src="https://gist.github.com/kshyju/8b9c4a611f773369f14f40578dd74892.js?file=UseWhenExtensionUse.cs"></script>
 
