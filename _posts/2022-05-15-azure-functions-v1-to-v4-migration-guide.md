@@ -13,7 +13,7 @@ Let's take a look at the version history of function apps with the TFM & hosting
 | Function runtime 	| TFM support                                                                          	|
 |------------------	|--------------------------------------------------------------------------------------	|
 | V1               	| .NET framework, In-proc only                                                         	|
-| V2               	| .Net core 2.X                                                                        	|
+| V2 (Deprecated)  	| .Net core 2.X                                                                        	|
 | V3               	| Out of process model is introduced. .NET 5<br>In-proc model with .Net core 3.X       	|
 | V4               	| In-proc model with .Net 6<br>Out of process model is .Net6, .Net7 and .NET framework 	|
 
@@ -93,7 +93,7 @@ The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. 
  - In in-proc model, functions are decorated with the `FunctionName` attribute. In the isolated model, we will use the `Function` attribute.
  - In the Isolated model, the [HttpRequestData](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.http.httprequestdata?view=azure-dotnet) type wraps information about the http request, instead of `HttpRequestMessage`
  - In the Isolated model, the [HttpResponseData](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.http.httpresponsedata?view=azure-dotnet) type should be used as the return type for Http functions.
- - For logging, V1 in-proc app uses `TraceWriter` from Microsoft.Azure.WebJobs.Host. In the V4 isolated model, you will use the ILogger. This experience will be same as [logging in .net/ASP.NET core apps](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-6.0). You can inject an ILogger instance via constructor injection. See example [here](https://github.com/Azure/azure-functions-dotnet-worker/blob/4400fa36120327130b73496970d7c9740b26f981/samples/NetFxWorker/HttpFunction.cs#L13-L18)
+ - For logging, V1 in-proc app uses `TraceWriter` from `Microsoft.Azure.WebJobs.Host`. In the V4 isolated model, you will use the `ILogger` type. This experience will be same as [logging in .net/ASP.NET core apps](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-6.0). You can inject an ILogger instance via constructor injection. See example [here](https://github.com/Azure/azure-functions-dotnet-worker/blob/4400fa36120327130b73496970d7c9740b26f981/samples/NetFxWorker/HttpFunction.cs#L13-L18)
  - You can add a parameter of type [FunctionContext](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.functioncontext?view=azure-dotnet) in your functions to get contextual information about the function being executed. See example [here](https://github.com/Azure/azure-functions-dotnet-worker/blob/4400fa36120327130b73496970d7c9740b26f981/samples/CustomMiddleware/HttpFunction.cs#L15-L16).
 
 
