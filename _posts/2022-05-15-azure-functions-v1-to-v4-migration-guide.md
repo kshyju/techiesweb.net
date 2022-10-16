@@ -95,9 +95,7 @@ The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. 
  - In the Isolated model, the HttpRequestData type wraps information about the http request, instead of `HttpRequestMessage`
  - In the Isolated model, the `HttpResponseData` type should be used as the return type for Http functions.
 
- > _Ideally, An isolated function should not have any reference to the `Microsoft.Azure.WebJobs` package. Packages with `Microsoft.Azure.Functions.Worker` prefix is what you need in your isolated function app._
-
- https://www.nuget.org/packages?q=Microsoft.Azure.Functions.Worker
+ > _Ideally, An isolated function should not have any reference to the `Microsoft.Azure.WebJobs` package. Packages with `Microsoft.Azure.Functions.Worker` [prefix]( https://www.nuget.org/packages?q=Microsoft.Azure.Functions.Worker) is what you need in your isolated function app._
 
 
 You should be good to run your app now. If you are using Visual studio, press F5 to start debugging.
@@ -106,7 +104,7 @@ Here are some useful links to help you with migration:
 
 1. [Guide for running C# Azure Functions in an isolated process](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
 2. [Refer this sample solution](https://github.com/kshyju/NetFXMigrationSample) which has V1 in-proc project and V4 isolated version of the same.
-2. [Isolated function app samples in the dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/tree/main/samples)
+2. [Isolated function app samples in the dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/tree/main/samples).
 3. [Bindings & Triggers in isolated model](https://github.com/Azure/azure-functions-dotnet-worker/wiki/.NET-Worker-bindings)
 3. [Follow Azure functions on twitter](https://twitter.com/AzureFunctions)
 
