@@ -46,7 +46,7 @@ Open your project file (.csproj) and make the below edits.
 
 So after these changes, your .csproj file will look like this.
 
-<script src="https://github.com/kshyju/NetFXMigrationSample/blob/main/V4/V4HttpFunctionApp/V4HttpFunctionApp.csproj#L1-L21"></script>
+<script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=v4-netfx-csproj-xml"></script>
 
 ### 2) Updated configuration files
 
