@@ -6,7 +6,7 @@ tags: [Azure functions, Functions, Isolated azure functions, Azure functions V1 
 description: Azure functions V1(in-proc) to V4(isolated) migration.
 ---
 
-Azure functions dotnet isolated model recently started supporting  function app creation with .NET Framework as target framework. This is great news for devs maintaining V1 version of function apps because they can now migrate their V1 apps to the latest function runtime version([V4](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/azure-functions-4-0-and-net-6-support-are-now-generally/ba-p/2933245)).
+Azure functions dotnet isolated model [recently started supporting](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/announcing-general-availability-for-azure-functions-v4-net/ba-p/3637605) function apps targeting .NET Framework. This is great news for devs maintaining V1 version of function apps because they can now migrate their V1 apps to the latest function runtime version([V4](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/azure-functions-4-0-and-net-6-support-are-now-generally/ba-p/2933245)).
 
 Let's take a look at the version history of function apps with the TFM & hosting models it supported.
 
