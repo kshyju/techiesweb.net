@@ -22,7 +22,7 @@ Until now, function apps created with V1 version could not migrate to the newer 
 
  > _The important thing to keep in mind is that, you will be migrating your in-proc app to isolated model._
 
-### Migration fundamentals 
+### In-proc to Isolated migration
 
 We will use a very simple V1 function app with Http trigger for the migration example.
 
@@ -37,22 +37,57 @@ Open your project file (.csproj) and make the below edits.
     The in-proc model uses the `Microsoft.NET.Sdk.Functions` package. In the isolated model, we use a different set of packages.
 
     The below 2 packages are needed for all isolated function apps.
-    - Microsoft.Azure.Functions.Worker
-    - Microsoft.Azure.Functions.Worker.Sdk
+    - [Microsoft.Azure.Functions.Worker](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker)
+    - [Microsoft.Azure.Functions.Worker.Sdk](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Sdk)
 
     The below package is needed for Http functions. Since our example is migrating a function app with HttpTrigger, we need this package as well. In the in-proc model, the Microsoft.NET.Sdk.Functions implicitly brings the `Microsoft.Azure.WebJobs.Extensions.Http` package for http function support.
 
-    - Microsoft.Azure.Functions.Worker.Extensions.Http
+    - [Microsoft.Azure.Functions.Worker.Extensions.Http](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.Http)
 
 So after these changes, your .csproj file will look like this:
 
 <script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=V4NetFxcsproj.cs"></script>
 
-### 2) Updated configuration files
+```
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.10.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+</Project>
+```
+
+### 2) Update configuration files
 
 Open your `local.settings.json` file and add a new entry under `Values` with key `FUNCTIONS_WORKER_RUNTIME` and value `dotnet-isolated`
 
 You can remove `AzureWebJobsDashboard` entry if present in your config. 
+
+```
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  }
+}
+```
+
 
 ### 3) Add a Program.cs with startup code
 
@@ -74,7 +109,7 @@ internal class Program
 }
 ```
 
-This is the bootstrapping code for the isolated application. It creates a generic host, configure the services needed for it to work as a function app, build the host and run it. 
+This is the bootstrapping code for the isolated application. It creates a [generic host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host), configure the services needed for it to work as a function app, build the host and run it. 
 
 ### 4) Switch to the new types
 
