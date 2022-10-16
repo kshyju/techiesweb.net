@@ -48,9 +48,6 @@ So after these changes, your .csproj file will look like this:
 
 <script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=V4NetFxcsproj.cs"></script>
 
-<script src="https://gist.github.com/kshyju/8b9c4a611f773369f14f40578dd74892.js?file=UseWhenExtensionUse.cs"></script>
-
-
 ### 2) Updated configuration files
 
 Open your `local.settings.json` file and add a new entry under `Values` with key `FUNCTIONS_WORKER_RUNTIME` and value `dotnet-isolated`
