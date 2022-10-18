@@ -48,6 +48,8 @@ So after these changes, your .csproj file will look like this:
 
 <script src="https://gist.github.com/kshyju/463f9adaa8fd4387b8e3ec1bd6d3b81a.js?file=V4NetFxcsproj.cs"></script>
 
+> _The isolated model function app should not have a reference to `Microsoft.NET.Sdk.Functions` package. That package is only meant for in-proc function apps._
+
 ### 2) Update configuration files
 
 Open your `local.settings.json` file and add a new entry under `Values` with key `FUNCTIONS_WORKER_RUNTIME` and value `dotnet-isolated`
@@ -103,8 +105,21 @@ The v1 in-proc version uses types from the `Microsoft.Azure.WebJobs` namespace. 
 
 You should be good to run your app now. If you are using Visual studio, press F5 to start debugging.
 
-> _For users who uses Visual Studio as their IDE, you need to use [Visual studio 2022 Preview](https://visualstudio.microsoft.com/vs/preview/) 17.4.0 Preview 3 or later for F5 debugging to work._
+### IDE support
 
+For users who uses Visual Studio as their IDE, you need to use [Visual studio 2022 Preview](https://visualstudio.microsoft.com/vs/preview/) 17.4.0 Preview 3 or later for F5 debugging to work. 
+
+If you are still running into issues when debugging a .net framework function app, even after installing [preview 3 or later](https://visualstudio.microsoft.com/vs/preview/), It is possible that VS failed to automatically update the azure functions tools to latest version. In this case, you shall manually update the azure functions tools using the Options dialog.
+
+**Tools** -> **Options** -> **Projects & Solutions** -> **Azure functions** and click on the "**Check for updates**" button.
+
+![image](https://user-images.githubusercontent.com/144469/196545654-a78b079e-f5fb-4641-af69-544288aa0a38.png)
+
+Install the updates as needed. 
+
+![updates-available](https://user-images.githubusercontent.com/144469/196546748-e8d896cb-db46-4889-b8e9-943a1b5d55b1.png)
+
+Restart Visual Studio and try to create a new Azure functions project and you should see ".NET Framework Isolated" in the functions worker dropdown. 
 
 Here are some useful links to make your migration experience a breeze:
 
