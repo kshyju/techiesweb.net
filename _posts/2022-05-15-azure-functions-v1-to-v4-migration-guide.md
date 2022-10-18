@@ -113,11 +113,11 @@ If you are still running into issues when debugging a .net framework function ap
 
 **Tools** -> **Options** -> **Projects & Solutions** -> **Azure functions** and click on the "**Check for updates**" button.
 
-![image](https://user-images.githubusercontent.com/144469/196545654-a78b079e-f5fb-4641-af69-544288aa0a38.png)
+![Check Azure functions tools updates available](/assets/vs-azfunc-updates-check.png)
 
 Install the updates as needed. 
 
-![updates-available](https://user-images.githubusercontent.com/144469/196546748-e8d896cb-db46-4889-b8e9-943a1b5d55b1.png)
+![Install Azure functions tools Updates](/assets/updates-available.png)
 
 Restart Visual Studio and try to create a new Azure functions project and you should see ".NET Framework Isolated" in the functions worker dropdown. 
 
