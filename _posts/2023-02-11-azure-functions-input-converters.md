@@ -18,13 +18,13 @@ The process of using the raw input data to populate all the function inputs appr
 
 A small component responsible for converting the raw input to a specific type of function input type. The dotnet isolated package ships with a default set of converters and the Input conversion pipeline uses these converters to successfully bind all the function parameters.
 
-## Extending the pipeline
+## Extending the input conversion pipeline
 
 If the built-in converters are not handling your use cases, you may write your own input converter and register that with your function app. Let's take a look at an example.
 
 Imagine you have POCO like below to represent customer information.
 
-```C#
+```c#
 public class Customer
 {
     public string Name { get; set; }
@@ -37,7 +37,7 @@ public class Customer
 
 and you want to use that type as a parameter of your function and you want to populate this from using some minimal information from your http request. For example, assume your http request includes the unique id of the customer in the route (ex: "`/api/customers/123`") and you want to use that id value to pull the customer details from another source (ex: a database /XML file/ a REST API etc..)
 
-```C#
+```c#
 [Function("Update")]
 public HttpResponseData Update(
     [HttpTrigger(AuthorizationLevel.Anonymous, "get",Route ="customers/{id}")] HttpRequestData req,
@@ -61,7 +61,7 @@ To make this happen, we will extend the input conversion pipeline with a custom 
 
 Create a class and have it implement the [IInputConverter](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.converters.iinputconverter?view=azure-dotnet) interface. The `InputConverter` interface has a `ConvertAsync` method which we are going to implement with our custom logic.
 
-```C#
+```c#
 public class CustomerConverter : IInputConverter
 {
     public ValueTask<ConversionResult> ConvertAsync(ConverterContext context)
@@ -75,7 +75,7 @@ public class CustomerConverter : IInputConverter
 The `ConvertAsync` method receives an instance of [ConverterContext](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.functions.worker.converters.convertercontext?view=azure-dotnet), from which we can get information about the raw input data and the target type (the parameter type) we are going to bind to. In this specific example, we need the Id value from the request URL/route. We could access that from the BindingContext on the FunctionContext.
 
 
-```C#
+```c#
 public async ValueTask<ConversionResult> ConvertAsync(ConverterContext context)
 {
     if (context.FunctionContext.BindingContext.BindingData.TryGetValue("id", out var idObj))
@@ -211,7 +211,7 @@ public HttpResponseData Update(
 ```
 In this case, you do not need to decorate your book POCO with the `InputConverter` attribute.
 
-```C#
+```c#
 public class Book
 {
     public string Name { set; get; }
