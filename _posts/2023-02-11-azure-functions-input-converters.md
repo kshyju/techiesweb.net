@@ -245,9 +245,10 @@ public class BookConverter : IInputConverter
 }
 ```
 
+Take a look at [this repo](https://github.com/kshyju/IsolatedFunctionSamples/tree/input-converters) for a complete working sample.
 
 
-Give it a shot. If you are running into issues, please open a new issue in the [dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/issues). 
+Give it a try. If you are running into issues, please open a new issue in the [dotnet worker repo](https://github.com/Azure/azure-functions-dotnet-worker/issues). 
 
 
 Cheers
