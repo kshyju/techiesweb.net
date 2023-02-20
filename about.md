@@ -12,7 +12,7 @@ Hi there, my name is Shyju and I am a curious developer who is passionate about 
 </p>
 
 <p><a href="https://mvp.microsoft.com/en-us/PublicProfile/5002157?fullName=Shyju%20%20Krishnankutty">MVP Profile</a></p>
-<p><a href="http://stackoverflow.com/story/kshyju">StackOverflow Developer story</a></p>
+<p><a href="https://github.com/kshyju">GitHub profile</a></p>
 
 <p>
 <a href="https://stackoverflow.com/users/40521/shyju">
@@ -20,5 +20,5 @@ Hi there, my name is Shyju and I am a curious developer who is passionate about 
 </a>
 </p>
 
-<p>I have a twitter account where i mostly retweet useful stuff for developers,primarily related to the dotnet & javascript eco system. <a href="https://twitter.com/kshyju" target="_blank">@kshyju</a></p>
+<p>Occasionally (re-)tweet about Azure functions related stuff <a href="https://twitter.com/kshyju" target="_blank">@kshyju</a></p>
 <p>This blog is hosted by github pages ❤️</p>
